@@ -18,7 +18,7 @@ export const postLogin = (email, password) => {
     dispatch(startLoading());
     axios({
       method: "POST",
-      url: `${API_URL}/authentication/login`,
+      url: `${API_URL}/user/login`,
       headers: {
         "Content-Type": "application/json",
       },
@@ -61,7 +61,7 @@ export const postRegister = (name, email, username, password, history) => {
     dispatch(startLoading());
     axios({
       method: "POST",
-      url: `${API_URL}/authentication/register`,
+      url: `${API_URL}/user/register`,
       headers: {
         "Content-Type": "application/json",
       },

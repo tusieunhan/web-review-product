@@ -94,7 +94,7 @@ const Sidebar = () => {
           to="/"
           className="bg-gradient-to-bl font-semibold from-pink-400 px-6 py-3  rounded text-sm text-white to-pink-600"
         >
-          BAKERY
+          SOCIAL REVIEW
           {/* <img src={DefaultProfile} className="logo_inverse" alt="avatar" /> */}
         </Link>
         {DarkModeToggle()}

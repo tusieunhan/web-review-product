@@ -7,10 +7,10 @@ const HeroSection = () => {
     <div className={styles["hero-section"]}>
       <div>
         <h1 className={styles.title}>
-          Social Networking Platform <br /> To Share Your Cake Recipe
+          <span className="text-pink-500">Social Review</span> - Đánh giá sản phẩm
         </h1>
         <div className={styles.subtitle}>
-          Cake Recipe - Specific Instructions - Baking Tools
+        Đánh giá sản phẩm tốt nhất cho bạn
         </div>
         <Link
           to="/signUp"

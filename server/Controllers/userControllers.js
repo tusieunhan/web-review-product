@@ -1,51 +1,28 @@
 const { User } = require("../Model/userModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const nodemailer = require("nodemailer");
 
 const userControllers = {
   register: async (req, res) => {
+    const name = await User.findOne({ username: req.body.username });
     try {
-      const name = await User.findOne({ username: req.body.username });
       if (name) {
         res.json({ message: "Account exits!", code: false });
       } else {
-        let code = Math.floor(Math.random() * (9999 - 1000) + 1000);
+
         const salt = await bcrypt.genSalt(10);
         const hashed = await bcrypt.hash(req.body.password, salt);
+
         const newUser = new User({
           ...req.body,
           password: hashed,
-          code,
         });
         const user = await newUser.save();
-        const { email } = user;
+
         res.json({
-          message: `Please check mail to verify your account ${email}`,
+          message: "Account created !",
           code: true,
-        });
-
-        const transporter = nodemailer.createTransport({
-          service: "gmail",
-          auth: {
-            user: "levantu.iuh@gmail.com",
-            pass: "Hoilamgi03",
-          },
-        });
-
-        const mailOptions = {
-          from: "levantu.iuh@gmail.com",
-          to: req.body.email,
-          subject: "Send from instagram",
-          text: `Click me ! Verify account ! ${code}`,
-        };
-
-        transporter.sendMail(mailOptions, function (error, info) {
-          if (error) {
-            console.log("error", error);
-          } else {
-            console.log("Email sent: " + info.response);
-          }
+          user
         });
       }
     } catch (error) {
@@ -79,7 +56,7 @@ const userControllers = {
     try {
       let user;
       user = await User.findOne({
-        $or: [{ email: req.body.email }, { username: req.body.email }],
+        $or: [{ email: req.body.email }, { username: req.body.username }],
       });
       // user = await User.findOne({ email: req.body.email });
       if (!user) {

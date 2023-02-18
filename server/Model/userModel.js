@@ -11,7 +11,6 @@ const userSchema = new mongoose.Schema({
     type: String,
   },
   name: {
-    required: true,
     type: String,
   },
   dayofbrith: {
@@ -24,7 +23,6 @@ const userSchema = new mongoose.Schema({
     type: String,
   },
   photo: {
-    required: true,
     type: String,
     default: "https://cdn-icons-png.flaticon.com/512/1053/1053244.png",
   },
@@ -43,7 +41,6 @@ const userSchema = new mongoose.Schema({
   posts: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Post",
-    default: []
   },
   code: {
     type: Number,

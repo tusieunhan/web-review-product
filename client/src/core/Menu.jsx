@@ -26,7 +26,7 @@ const Menu = () => {
       <div className="header_inner">
         <div className="left-side">
           <div id="logo" className=" uk-hidden@s">
-            BAKERY
+            
           </div>
           <div
             className="triger"

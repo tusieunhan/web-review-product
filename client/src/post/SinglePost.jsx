@@ -95,25 +95,6 @@ function SinglePost() {
   };
 
 
-  // const deletePost = () => {
-  //   const postId = this.props.match.params.postId;
-  //   const token = isAuthenticated().token;
-  //   remove(postId, token).then((data) => {
-  //     if (data.error) {
-  //       console.log(data.error);
-  //     } else {
-  //       // this.setState({ redirectToHome: true });
-  //       console.log(data.error);
-  //     }
-  //   });
-  // };
-
-  // const deleteConfirmed = () => {
-  //   let answer = window.confirm("Are you sure you want to delete your post?");
-  //   if (answer) {
-  //     deletePost();
-  //   }
-  // };
 
   return (
    <div className="flex justify-center w-full">
@@ -141,24 +122,7 @@ function SinglePost() {
     <div>
       <h5 className="px-4 text-3xl">{post.postBody}</h5>
       
-      {/* <Link to={`/post/${post.id}`}>
 
-          <div class="col-span-2">
-              <img
-                src={`${post.recipe?.steps[0]?.image 
-                  ? post.recipe?.steps[0]?.image 
-                  : post.recipe?.steps[1]?.image 
-                  ? post.recipe?.steps[1]?.image 
-                  : `https://source.unsplash.com/random/?bakery,bake,${post.member.name}`}`}
-                onError={(i) =>
-                  (i.target.src = `https://source.unsplash.com/random/?bakery,bake,${post.id}`)
-                }
-                className="rounded-md w-full object-cover"
-                style={{ height: "30rem" }}
-              />
-          </div>
-
-      </Link> */}
       {post.recipe?.steps?.map((step, index) => {
           return (<div class='p-4'>
                     <p className="text-2xl font-semibold">Bước {index + 1} {step.step}</p>

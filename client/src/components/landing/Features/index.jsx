@@ -14,26 +14,7 @@ const Features = () => {
   }, []);
   return (
     <div data-aos={"fade-down"}>
-      <SectionContainer>
-        <SectionHeader>Features that you really love</SectionHeader>
-        <div className={styles.features}>
-          <FeatureItem
-            icon={<ion-icon name="beer"></ion-icon>}
-            title="Extended color palette"
-            description="A beautiful color palette that can be easily modified with our nicely coded Sass files."
-          />
-          <FeatureItem
-            icon={<ion-icon name="fast-food"></ion-icon>}
-            title="Everything is modular"
-            description="Nicely customized components that can be reused anytime and anywhere in your project."
-          />
-          <FeatureItem
-            icon={<ion-icon name="pizza"></ion-icon>}
-            title="700+ Components"
-            description="Nicely customized components that can be reused anytime and anywhere in your project"
-          />
-        </div>
-      </SectionContainer>
+      
     </div>
   );
 };

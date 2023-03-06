@@ -1,5 +1,5 @@
 export const signUp = (user) => {
-  return fetch(`${process.env.REACT_APP_API_URL}/signUp`, {
+  return fetch(`${process.env.REACT_APP_API_URL}/auth/login`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -10,11 +10,11 @@ export const signUp = (user) => {
     .then((response) => {
       return response.json();
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log("Fial to sign up"));
 };
 
 export const signIn = (email, password) => {
-  return fetch(`${process.env.REACT_APP_API_URL}/signIn`, {
+  return fetch(`${process.env.REACT_APP_API_URL}/auth/register`, {
     method: "POST",
     headers: {
       Accept: "application/json",

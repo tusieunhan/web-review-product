@@ -13,50 +13,7 @@ const Sidebar = () => {
     if (pathname === path) return "active";
     else return "";
   };
-  // const [users, setUsers] = useState(null);
-  // const [postByUser, setPostByUser] = useState(null);
-  // useEffect(
-  //   () => {
-  //     axios({
-  //       method: "GET",
-  //       url: `${process.env.REACT_APP_API_URL}/user/${isLogin.user.id}`,
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: `Bearer ${isLogin.token}`,
-  //       },
-  //       data: null,
-  //     })
-  //       .then((res) => {
-  //         setUsers(res.data);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   },
-  //   // eslint-disable-next-line
-  //   []
-  // );
-  // useEffect(
-  //   () => {
-  //     axios({
-  //       method: "GET",
-  //       url: `${process.env.REACT_APP_API_URL}/post/by/${isLogin.user.id}`,
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: `Bearer ${isLogin.token}`,
-  //       },
-  //       data: null,
-  //     })
-  //       .then((res) => {
-  //         setPostByUser(res.data);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   },
-  //   // eslint-disable-next-line
-  //   []
-  // );
+
 
   function handleLogout(e) {
     e.preventDefault();
@@ -92,10 +49,10 @@ const Sidebar = () => {
       <div className="sidebar_header border-b border-gray-200 from-gray-100 to-gray-50 bg-gradient-to-t  uk-visible@s">
         <Link
           to="/"
-          className="bg-gradient-to-bl font-semibold from-pink-400 px-6 py-3  rounded text-sm text-white to-pink-600"
+          className="font-bold text-pink-400 px-6 py-3  rounded text-sm"
         >
           SOCIAL REVIEW
-          {/* <img src={DefaultProfile} className="logo_inverse" alt="avatar" /> */}
+
         </Link>
         {DarkModeToggle()}
       </div>
@@ -113,7 +70,7 @@ const Sidebar = () => {
               src={
                 avatar
                   ? avatar
-                  : `https://source.unsplash.com/random/?bakery,bake,${isLogin.name}`
+                  : `https://www.tenforums.com/attachments/tutorials/146359d1501443008-change-default-account-picture-windows-10-a-user.png`
               }
               className="bg-gray-200 border-4 border-white rounded-full w-full h-full"
               alt="avatar"
@@ -123,30 +80,8 @@ const Sidebar = () => {
             to={`/user/${isLogin.id}`}
             className="text-xl font-medium capitalize mt-4 uk-link-reset"
           >
-            {`${isLogin.name}`}
+            {`${isLogin.username}`}
           </Link>
-          {/* {users && postByUser && (
-            <div className="flex justify-around w-full items-center text-center uk-link-reset text-gray-800 mt-6">
-              <div>
-                <div>
-                  <strong>Post</strong>
-                  <div>{postByUser.length}</div>
-                </div>
-              </div>
-              <div>
-                <div>
-                  <strong>Following</strong>
-                  <div>{users.following.length}</div>
-                </div>
-              </div>
-              <div>
-                <div>
-                  <strong>Followers</strong>
-                  <div>{users.followers.length}</div>
-                </div>
-              </div>
-            </div>
-          )} */}
         </div>
         <hr className="-mx-4 -mt-1 uk-visible@s" />
         <ul>
@@ -273,8 +208,8 @@ const Sidebar = () => {
               <span> Settings </span>
             </Link>
           </li>
-          <li className={isActive(`/user/${isLogin.id}`)}>
-            <Link to={`/user/${isLogin.id}`}>
+          <li className={isActive(`/user/${isLogin._id}`)}>
+            <Link to={`/user/${isLogin._id}`}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"

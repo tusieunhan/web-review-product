@@ -20,7 +20,7 @@ const Profile = () => {
     });
     return match;
   };
-  
+
 
 
   useEffect(
@@ -42,6 +42,8 @@ const Profile = () => {
       setFollowing(!following);
     });
   };
+
+  console.log(users);
   return (
     <>
       {loading || !users ? (
@@ -56,9 +58,9 @@ const Profile = () => {
                 <img
                   src={`${users.avatar}`}
                   onError={(i) =>
-                    (i.target.src = `https://source.unsplash.com/random/?bakery,bake,${users.username}`)
+                    (i.target.src = `https://www.tenforums.com/attachments/tutorials/146359d1501443008-change-default-account-picture-windows-10-a-user.png`)
                   }
-                  alt={users.name}
+                  alt={users.username}
                   className="bg-gray-200 border-4 border-white rounded-full w-full h-full dark:border-gray-900"
                 />
                 <div className="absolute -bottom-3 custom-overly1 flex justify-center pt-4 pb-7 space-x-3 text-2xl text-white uk-transition-slide-bottom-medium w-full">
@@ -73,13 +75,13 @@ const Profile = () => {
             </div>
             <div className="lg:w/8/12 flex-1 flex flex-col lg:items-start items-center">
               <h2 className="font-semibold lg:text-2xl text-lg mb-2">
-                {users.name}
+                {users.username}
               </h2>
               <p className="lg:text-left mb-2 text-center  dark:text-gray-100">
                 {users.about}
               </p>
               <p className="lg:text-left mb-2 text-center  dark:text-gray-100">{`Joined ${new Date(
-                users.created
+                users.createdAt
               ).toDateString()}`}</p>
               <div className="flex font-semibold mb-3 space-x-2  dark:text-gray-10">
                 <Link href="#">Travailing</Link> , <Link href="#">Sports</Link>{" "}
@@ -87,7 +89,7 @@ const Profile = () => {
               </div>
               <div className="capitalize flex font-semibold space-x-3 text-center text-sm my-2">
                 {isAuthenticated().user &&
-                isAuthenticated().user._id === users._id ? (
+                  isAuthenticated().user._id === users._id ? (
                   <>
                     <Link
                       className="bg-gray-300 shadow-sm p-2 px-6 rounded-md dark:bg-gray-700"

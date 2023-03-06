@@ -26,7 +26,7 @@ const Menu = () => {
       <div className="header_inner">
         <div className="left-side">
           <div id="logo" className=" uk-hidden@s">
-            
+
           </div>
           <div
             className="triger"
@@ -119,7 +119,7 @@ const Menu = () => {
                   src={
                     avatar
                       ? avatar
-                      : `https://source.unsplash.com/random/?bakery,bake,${isLogin.id}`
+                      : `https://www.tenforums.com/attachments/tutorials/146359d1501443008-change-default-account-picture-windows-10-a-user.png`
                   }
                   class="bg-gray-200 border border-white rounded-full w-8 h-8"
                   alt="avatar"

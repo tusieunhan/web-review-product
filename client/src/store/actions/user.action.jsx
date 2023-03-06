@@ -14,11 +14,12 @@ import { startLoading, stopLoading } from "../actions/common.action";
 const API_URL = process.env.REACT_APP_API_URL;
 
 export const postLogin = (email, password) => {
+  console.log(email, password);
   return (dispatch) => {
     dispatch(startLoading());
     axios({
       method: "POST",
-      url: `${API_URL}/user/login`,
+      url: `${API_URL}/auth/login`,
       headers: {
         "Content-Type": "application/json",
       },
@@ -37,7 +38,8 @@ export const postLogin = (email, password) => {
         dispatch(stopLoading());
         dispatch(postLoginFailed(err));
         console.log(err);
-        NotificationManager.error(err.response.data.message);
+
+        NotificationManager.error("Login failed");
       });
   };
 };
@@ -61,7 +63,7 @@ export const postRegister = (name, email, username, password, history) => {
     dispatch(startLoading());
     axios({
       method: "POST",
-      url: `${API_URL}/user/register`,
+      url: `${API_URL}/auth/register`,
       headers: {
         "Content-Type": "application/json",
       },
@@ -78,7 +80,7 @@ export const postRegister = (name, email, username, password, history) => {
       .then((res) => {
         dispatch(stopLoading());
         history.push("/SignIn");
-        NotificationManager.success("Registration is successful, please login","",3000);
+        NotificationManager.success("Registration is successful, please login", "", 3000);
       })
       .catch((err) => {
         dispatch(stopLoading());
@@ -97,7 +99,7 @@ export const getUser = (userId) => {
     dispatch(startLoading());
     axios({
       method: "GET",
-      url: `${API_URL}/member/${userId}`,
+      url: `${API_URL}/user/${userId}`,
       headers: {
         "Content-Type": "application/json",
       },

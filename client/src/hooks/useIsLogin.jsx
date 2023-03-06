@@ -18,7 +18,7 @@ export function useIsLogin() {
   const avatar = users === null || users.avatar === null ? "" : users.avatar;
 
   return {
-    isLogin: user,
+    isLogin: user.user,
     avatar,
     loading,
   };

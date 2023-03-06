@@ -1,34 +1,40 @@
-const express = require("express");
-const cors = require("cors");
-const dotenv = require("dotenv");
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
-const userRoute = require("./Router/userRoute");
-const postRoute = require("./Router/postRoute");
+import express from "express";
+import bodyParser from "body-parser";
+import cors from "cors";
+import dotenv from "dotenv";
+import mongoose from "mongoose";
 
-dotenv.config();
-const PORT = 2222;
+
+// routes
+import AuthRoute from './routes/AuthRoute.js'
+import UserRoute from './routes/UserRoute.js'
+import PostRoute from './routes/PostRoute.js'
+import UploadRoute from './routes/UploadRoute.js'
+
+
 const app = express();
 
+
+// middleware
+app.use(bodyParser.json({ limit: "30mb", extended: true }));
+app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
-app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+// to serve images inside public folder
+app.use(express.static('public'));
+app.use('/images', express.static('images'));
+
+
+dotenv.config();
+const PORT = 8888;
+
+const CONNECTION = `mongodb+srv://levantuiuh:Hoilamgi03@vantu.ufkrlc7.mongodb.net/?retryWrites=true&w=majority`
 mongoose
-  .connect(process.env.MONGODB_KEY, {
-    useNewUrlParser: true,
-    useUniFiedTopology: true,
-  })
-  .then(() => {
-    console.log("Connected to DB");
-    app.listen(PORT, () => {
-      console.log("Server is running with port", PORT);
-    });
-  })
-  .catch((err) => {
-    console.log("Eroor", err);
-  });
+  .connect(CONNECTION, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => app.listen(PORT, () => console.log(`Listening at Port ${PORT}`)))
+  .catch((error) => console.log(` did not connect`));
 
-app.use("/user", userRoute);
-app.use("/post", postRoute);
 
-module.exports = app;
+app.use('/auth', AuthRoute);
+app.use('/user', UserRoute)
+app.use('/posts', PostRoute)
+app.use('/upload', UploadRoute)

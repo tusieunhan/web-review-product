@@ -14,11 +14,12 @@ export function useIsLogin() {
     // eslint-disable-next-line
     []
   );
+
   const { users } = useSelector((state) => state.user);
   const avatar = users === null || users.avatar === null ? "" : users.avatar;
 
   return {
-    isLogin: user.user,
+    isLogin: user?.user,
     avatar,
     loading,
   };

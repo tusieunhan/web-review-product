@@ -1,13 +1,15 @@
 import axios from "axios";
+import { useIsLogin } from "../hooks/useIsLogin";
 
-export const create = (userId, token, post) => {
-  return fetch(`${process.env.REACT_APP_API_URL}/post/new/${userId}`, {
+export const create = (userId, content, photo, isLogin, title) => {
+  console.log(isLogin);
+  return fetch(`${process.env.REACT_APP_API_URL}/posts`, {
     method: "POST",
     headers: {
       Accept: "application/json",
-      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
     },
-    body: post,
+    body: JSON.stringify({ userId, desc: content, image: photo, avatar: isLogin.avatar, username: isLogin.username, title }),
   })
     .then((response) => {
       return response.json();

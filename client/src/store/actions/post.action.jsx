@@ -4,7 +4,7 @@ import { startLoading, stopLoading } from "../actions/common.action";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-export const Post = ({postBody, recipe,tool, history}) => {
+export const Post = ({ postBody, recipe, tool, history }) => {
   const userLogin = localStorage.getItem("userLogin");
   const token = userLogin ? JSON.parse(userLogin).token : "";
 
@@ -17,27 +17,27 @@ export const Post = ({postBody, recipe,tool, history}) => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      
+
       data: {
         postBody,
-        recipe : {
+        recipe: {
           name: recipe.postBody,
 
-          steps: recipe.steps.map((item,index)=>{
+          steps: recipe.steps.map((item, index) => {
             return {
               step: item.recipe.name,
               description: item.recipe.description,
-              ingredients: item.tool.map((item,index)=>{
+              ingredients: item.tool.map((item, index) => {
                 return {
                   id: 1,
                   quantity: index
                 }
               }),
-              image : item.recipe?.postImages ? item.recipe?.postImages[0].image : null
+              image: item.recipe?.postImages ? item.recipe?.postImages[0].image : null
 
             }
           }),
-          tool : ['a','b','c']
+          tool: ['a', 'b', 'c']
         }
       },
     })
@@ -63,14 +63,13 @@ export const getListPost = (
     dispatch(startLoading());
     axios({
       method: "GET",
-      url: `${API_URL}/post?page=${page}&size=5`,
-      data: null,
+      url: `${API_URL}/posts`,
     })
       .then((res) => {
         dispatch(stopLoading());
-        setPosts([...posts, ...res.data.list]);
+        setPosts([...posts, ...res.data]);
         setLoading(false);
-        setTotalPages(res.data.totalPage);
+        // setTotalPages(res.data.totalPage);
       })
       .catch((err) => {
         dispatch(stopLoading());
@@ -93,7 +92,7 @@ export const getComment = (id, setListComment) => {
         console.log(res.data.list);
         setListComment(res.data.list);
       })
-      .catch((err) => {});
+      .catch((err) => { });
   };
 };
 
@@ -116,7 +115,7 @@ export const postComment = (
       data: {
         commentDetail,
         image,
-        member:{
+        member: {
           id: memberID,
         },
         post: {

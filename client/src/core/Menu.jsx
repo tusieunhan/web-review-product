@@ -114,14 +114,14 @@ const Menu = () => {
           </div>
           <div>
             <Link href="#">
-              <div className="bg-gradient-to-tr from-yellow-600 to-pink-600 p-0.5 rounded-full">
+              <div className="bg-gradient-to-tr from-yellow-600 to-pink-600 p-0.5 rounded-full ">
                 <img
                   src={
-                    avatar
-                      ? avatar
+                    isLogin.avatar
+                      ? isLogin.avatar
                       : `https://www.tenforums.com/attachments/tutorials/146359d1501443008-change-default-account-picture-windows-10-a-user.png`
                   }
-                  class="bg-gray-200 border border-white rounded-full w-8 h-8"
+                  class="bg-gray-200 border border-white rounded-full w-8 h-8 object-cover"
                   alt="avatar"
                 />
               </div>

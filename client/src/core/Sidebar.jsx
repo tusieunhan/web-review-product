@@ -68,11 +68,11 @@ const Sidebar = () => {
           <div className="bg-gradient-to-tr from-yellow-600 to-pink-600 p-1 rounded-full transition m-0.5 mr-2  w-24 h-24">
             <img
               src={
-                avatar
-                  ? avatar
+                isLogin.avatar
+                  ? isLogin.avatar
                   : `https://www.tenforums.com/attachments/tutorials/146359d1501443008-change-default-account-picture-windows-10-a-user.png`
               }
-              className="bg-gray-200 border-4 border-white rounded-full w-full h-full"
+              className="bg-gray-200 border-4 border-white rounded-full w-full h-full object-cover"
               alt="avatar"
             />
           </div>

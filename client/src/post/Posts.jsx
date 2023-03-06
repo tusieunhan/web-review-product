@@ -5,16 +5,17 @@ import Load from "../components/load";
 import DataPost from "./DataPost";
 import { useHistory } from "react-router-dom";
 function Posts() {
-  const history=useHistory();
+  const history = useHistory();
   const dispatch = useDispatch();
   const [totalPages, setTotalPages] = useState(0);
   const [page, setPage] = useState(1);
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    dispatch(getListPost(page, posts, setPosts, setTotalPages, setLoading,history));
-    // eslint-disable-next-line
+    dispatch(getListPost(page, posts, setPosts, setTotalPages, setLoading, history));
   }, [page]);
+
+  console.log(posts);
 
   return posts.length === 0 ? (
     <h5 className="px-4">not found</h5>

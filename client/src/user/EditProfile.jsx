@@ -15,7 +15,7 @@ function EditProfile() {
   const [avatar, setAvatar] = useState("");
   useEffect(
     () => {
-      dispatch(getUser(isLogin.id));
+      dispatch(getUser(isLogin._id));
     },
     // eslint-disable-next-line
     []
@@ -59,9 +59,10 @@ function EditProfile() {
     // eslint-disable-next-line
     [selectedFile]
   );
+
   const clickSubmit = (event) => {
     event.preventDefault();
-    dispatch(putProfile(user.name, user.email, user.dob, avatar, history));
+    dispatch(putProfile(user.about, user.email, user.country, avatar, history));
   };
   const onSelectFile = (e) => {
     if (!e.target.files || e.target.files.length === 0) {
@@ -86,26 +87,14 @@ function EditProfile() {
               </div>
               <div className="flex justify-center flex-center text-center dark:text-gray-300">
                 <div className="flex flex-col choose-upload text-center">
-                  {avatar !== "" ? (
-                    <div
-                      className="bg-gray-400 border-2 border-dashed flex flex-col h-56 items-center justify-center relative w-full rounded-lg dark:bg-gray-800 dark:border-gray-600"
-                      style={{
-                        backgroundImage: `url(${avatar ? avatar : user.avatar})`,
-                      }}
-                    ></div>
-                  ) : (
-                    <div className="bg-gray-400 border-2 border-dashed flex flex-col h-56 items-center justify-center relative w-full rounded-lg dark:bg-gray-800 dark:border-gray-600">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        className="w-12"
-                      >
-                        <path d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 13H11V9.413l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13H5.5z" />
-                        <path d="M9 13h2v5a1 1 0 11-2 0v-5z" />
-                      </svg>
-                    </div>
-                  )}
+
+                  <div
+                    className="bg-gray-400 border-2  border-dashed flex flex-col h-56 items-center justify-center relative w-full rounded-lg dark:bg-gray-800 dark:border-gray-600"
+                    style={{
+                      background: `url(${avatar ? avatar : user.avatar}) center center / cover no-repeat`,
+                    }}
+                  ></div>
+
                   <p className="my-3 leading-6">
                     Do you have a photo wants to share us <br /> please upload
                     her ..
@@ -150,31 +139,29 @@ function EditProfile() {
                 Your Photo size Must be Maxmium 999MB
               </div>
             </div>
-            <div className="bg-white dark:bg-gray-900 rounded-md lg:shadow-lg shadow col-span-2">
-              <div className="grid grid-cols-2 gap-3 lg:p-6 p-4">
-                <div>
-                  <label htmlFor> name</label>
-                  <input
-                    type="text"
-                    name="name"
-                    onChange={handleChange}
-                    value={user.name}
-                    placeholder="Your name.."
-                    className="shadow-none bg-gray-100"
-                  />
-                </div>
-                <div>
-                  <label htmlFor> birth date</label>
-                  <input
-                    type="text"
-                    name="dob"
-                    onChange={handleChange}
-                    value={user.dob}
-                    placeholder="Your birth date.."
-                    className="shadow-none bg-gray-100"
-                  />
-                </div>
-                <div className="col-span-2">
+            <div className="bg-white dark:bg-gray-900 rounded-md lg:shadow-lg shadow col-span-2 p-8 space-y-8 ">
+              <div>
+                <label htmlFor> About</label>
+                <input
+                  type="text"
+                  name="about"
+                  onChange={handleChange}
+                  value={user.about}
+                  placeholder="Your name.."
+                  className="shadow-none bg-gray-100"
+                />
+              </div>
+              <div>
+                <label htmlFor>country</label>
+                <input
+                  type="text"
+                  name="country"
+                  onChange={handleChange}
+                  value={user.country}
+                  placeholder="Your birth date.."
+                  className="shadow-none bg-gray-100"
+                />
+                <div className="mt-8">
                   <label htmlFor> Email</label>
                   <input
                     type="text"
@@ -182,11 +169,11 @@ function EditProfile() {
                     onChange={handleChange}
                     value={user.email}
                     placeholder="Your Email.."
-                    className="shadow-none bg-gray-100"
+                    className="shadow-none bg-gray-100 "
                   />
                 </div>
-               
               </div>
+
               <div className="bg-gray-10 p-6 pt-0 flex justify-end space-x-3">
                 <Link
                   to="#"
@@ -215,8 +202,9 @@ function EditProfile() {
             </div>
           </div>
         </form>
-      )}
-    </div>
+      )
+      }
+    </div >
   );
 }
 

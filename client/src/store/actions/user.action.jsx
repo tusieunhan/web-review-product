@@ -10,6 +10,7 @@ import {
   POST_BY_USER_FAILED,
 } from "../constants/user.const";
 import { startLoading, stopLoading } from "../actions/common.action";
+import { Dispatch } from "react";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -170,24 +171,22 @@ const getPostByUserFailed = (err) => {
   };
 };
 
-export const putProfile = (name, email, dob, avatar, history) => {
+export const putProfile = (about, email, country, avatar, history) => {
   const userLogin = localStorage.getItem("userLogin");
-  const id = userLogin ? JSON.parse(userLogin).id : "";
+  const id = JSON.parse(userLogin).user._id;
   const token = userLogin ? JSON.parse(userLogin).token : "";
+  console.log(userLogin);
   return (dispatch) => {
     dispatch(startLoading());
     axios({
       method: "PUT",
-      url: `${API_URL}/member/${id}`,
+      url: `${API_URL}/user/${id}`,
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
       data: {
-        name,
-        email,
-        dob,
-        avatar,
+        about, email, country, avatar
       },
     })
       .then((res) => {

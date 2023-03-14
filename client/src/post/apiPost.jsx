@@ -43,7 +43,7 @@ export const listAll = async () => {
 };
 
 export const singlePost = (postId) => {
-  return fetch(`${process.env.REACT_APP_API_URL}/post/${postId}`, {
+  return fetch(`${process.env.REACT_APP_API_URL}/posts/${postId}`, {
     method: "GET",
   })
     .then((response) => {
@@ -67,14 +67,18 @@ export const listByUser = (userId, token) => {
     .catch((err) => console.log(err));
 };
 
-export const remove = (postId, token) => {
-  return fetch(`${process.env.REACT_APP_API_URL}/post/${postId}`, {
+export const remove = (postId, userId, token) => {
+
+  console.log(postId, userId, token);
+
+  return fetch(`${process.env.REACT_APP_API_URL}/posts/${postId}`, {
     method: "DELETE",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
+    data: userId,
   })
     .then((response) => {
       return response.json();
@@ -82,13 +86,11 @@ export const remove = (postId, token) => {
     .catch((err) => console.log(err));
 };
 
-export const update = (postId, token, post) => {
-  console.log(postId, token, post);
-  return fetch(`${process.env.REACT_APP_API_URL}/post/${postId}`, {
+export const update = (postId, post) => {
+  return fetch(`${process.env.REACT_APP_API_URL}/posts/${postId}`, {
     method: "PUT",
     headers: {
       Accept: "application/json",
-      Authorization: `Bearer ${token}`,
     },
     body: post,
   })

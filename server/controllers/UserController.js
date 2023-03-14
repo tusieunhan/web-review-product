@@ -25,8 +25,8 @@ export const getAllUsers = async (req, res) => {
 
   try {
     let users = await UserModel.find();
-    users = users.map((user)=>{
-      const {password, ...otherDetails} = user._doc
+    users = users.map((user) => {
+      const { password, ...otherDetails } = user._doc
       return otherDetails
     })
     res.status(200).json(users);
@@ -41,7 +41,7 @@ export const updateUser = async (req, res) => {
   const id = req.params.id;
   // console.log("Data Received", req.body)
   const { _id, currentUserAdmin, password } = req.body;
-  
+
   if (id === _id) {
     try {
       // if we also have to update password then password will be bcrypted again
@@ -55,11 +55,10 @@ export const updateUser = async (req, res) => {
       });
       const token = jwt.sign(
         { username: user.username, id: user._id },
-        process.env.JWTKEY,
-        { expiresIn: "1h" }
+        "process.env.JWTKEY",
       );
-      console.log({user, token})
-      res.status(200).json({user, token});
+      console.log({ user, token })
+      res.status(200).json({ user, token });
     } catch (error) {
       console.log("Error agya hy")
       res.status(500).json(error);
@@ -122,23 +121,21 @@ export const unfollowUser = async (req, res) => {
   const id = req.params.id;
   const { _id } = req.body;
 
-  if(_id === id)
-  {
+  if (_id === id) {
     res.status(403).json("Action Forbidden")
   }
-  else{
+  else {
     try {
       const unFollowUser = await UserModel.findById(id)
       const unFollowingUser = await UserModel.findById(_id)
 
 
-      if (unFollowUser.followers.includes(_id))
-      {
-        await unFollowUser.updateOne({$pull : {followers: _id}})
-        await unFollowingUser.updateOne({$pull : {following: id}})
+      if (unFollowUser.followers.includes(_id)) {
+        await unFollowUser.updateOne({ $pull: { followers: _id } })
+        await unFollowingUser.updateOne({ $pull: { following: id } })
         res.status(200).json("Unfollowed Successfully!")
       }
-      else{
+      else {
         res.status(403).json("You are not following this User")
       }
     } catch (error) {

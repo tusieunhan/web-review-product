@@ -139,7 +139,7 @@ export const getPostByUser = (userId) => {
     dispatch(startLoading());
     axios({
       method: "GET",
-      url: `${API_URL}/post/user/${userId}?page=1&size=8`,
+      url: `${API_URL}/posts/list/${userId}`,
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,

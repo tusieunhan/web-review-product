@@ -15,7 +15,6 @@ function Posts() {
     dispatch(getListPost(page, posts, setPosts, setTotalPages, setLoading, history));
   }, [page]);
 
-  console.log(posts);
 
   return posts.length === 0 ? (
     <h5 className="px-4">not found</h5>

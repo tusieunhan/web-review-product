@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 // creating a post
 
 export const createPost = async (req, res) => {
-  const newPost = new PostModel(req.body);
+  const newPost = await new PostModel(req.body);
 
   try {
     await newPost.save();
@@ -27,6 +27,26 @@ export const getPost = async (req, res) => {
     res.status(500).json(error);
   }
 };
+//get list post by user
+export const getListPostUser = async (req, res) => {
+  const id = req.params.id;
+  console.log(id);
+  try {
+    const post = await PostModel.find({ "userId": id });
+    res.status(200).json(post);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+export const getListPost = async (req, res) => {
+
+  try {
+    const post = await PostModel.find()
+    res.status(200).json(post);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
 
 // update post
 export const updatePost = async (req, res) => {
@@ -41,7 +61,7 @@ export const updatePost = async (req, res) => {
     } else {
       res.status(403).json("Authentication failed");
     }
-  } catch (error) {}
+  } catch (error) { }
 };
 
 // delete a post
@@ -49,14 +69,16 @@ export const deletePost = async (req, res) => {
   const id = req.params.id;
   const { userId } = req.body;
 
+  console.log(req.body);
+
   try {
     const post = await PostModel.findById(id);
-    if (post.userId === userId) {
-      await post.deleteOne();
-      res.status(200).json("Post deleted.");
-    } else {
-      res.status(403).json("Action forbidden");
-    }
+    // if (post.userId === userId) {
+    await post.deleteOne();
+    res.status(200).json("Post deleted.");
+    // } else {
+    //   res.status(403).json("Action forbidden");
+    // }
   } catch (error) {
     res.status(500).json(error);
   }
@@ -64,16 +86,16 @@ export const deletePost = async (req, res) => {
 
 // like/dislike a post
 export const likePost = async (req, res) => {
-  const id = req.params.id;
-  const { userId } = req.body;
+  const { userId, postId } = req.body;
+  console.log(res.body);
   try {
-    const post = await PostModel.findById(id);
+    const post = await PostModel.findById(postId);
     if (post.likes.includes(userId)) {
       await post.updateOne({ $pull: { likes: userId } });
-      res.status(200).json("Post disliked");
+      res.status(200).json(post);
     } else {
       await post.updateOne({ $push: { likes: userId } });
-      res.status(200).json("Post liked");
+      res.status(200).json(post);
     }
   } catch (error) {
     res.status(500).json(error);
@@ -87,7 +109,7 @@ export const getTimelinePosts = async (req, res) => {
     const currentUserPosts = await PostModel.find({ userId: userId });
 
     const followingPosts = await UserModel.aggregate([
-      { 
+      {
         $match: {
           _id: new mongoose.Types.ObjectId(userId),
         },

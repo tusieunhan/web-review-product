@@ -43,7 +43,6 @@ const Profile = () => {
     });
   };
 
-  console.log(users);
   return (
     <>
       {loading || !users ? (
@@ -99,7 +98,7 @@ const Profile = () => {
                     </Link>
                     <Link
                       className="bg-pink-500 shadow-sm p-2 pink-500 px-6 rounded-md text-white hover:text-white hover:bg-pink-600"
-                      to={`/user/edit/${users._id}`}
+                      to={`/setting`}
                     >
                       Edit Profile
                     </Link>
@@ -194,11 +193,7 @@ const Profile = () => {
                   </div>
                 </div>
               </div>
-              {/* <ProfileTabs
-                followers={users.followers}
-                following={users.following}
-                posts={postByUser}
-              /> */}
+
             </div>
             <div className="w-20" />
           </div>

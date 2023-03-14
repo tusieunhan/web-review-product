@@ -5832,7 +5832,7 @@
  * 1. Resolve frame rate issues on devices with lower frame rates by forcing hardware acceleration
  */
  .uk-sticky-fixed {
-     z-index: 980;
+     z-index: 10;
      box-sizing: border-box;
      margin: 0 !important;
      /* 1 */

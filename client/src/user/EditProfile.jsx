@@ -17,7 +17,6 @@ function EditProfile() {
     () => {
       dispatch(getUser(isLogin._id));
     },
-    // eslint-disable-next-line
     []
   );
   const { users } = useSelector((state) => state.user);
@@ -73,9 +72,9 @@ function EditProfile() {
   };
   return (
     <div className="container m-auto">
-      <h1 className="text-2xl leading-none text-gray-900 tracking-tight mt-3">
+      <Link to={'/setting'} className="text-2xl leading-none text-gray-900 tracking-tight mt-3">
         Account Setting
-      </h1>
+      </Link>
       {user === null || users === null ? (
         <Load />
       ) : (

@@ -73,7 +73,7 @@ export const follow = (userId, token, followId) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ memberID:userId, followerID:followId }),
+    body: JSON.stringify({ memberID: userId, followerID: followId }),
   })
     .then((response) => {
       return response.json();
@@ -86,14 +86,14 @@ export const like = (userId, followId) => {
   const userLogin = localStorage.getItem("userLogin");
   const token = userLogin ? JSON.parse(userLogin).token : "";
 
-  return fetch(`${process.env.REACT_APP_API_URL}/like`, {
+  return fetch(`${process.env.REACT_APP_API_URL}/posts/like`, {
     method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ memberID:userId, postID:followId }),
+    body: JSON.stringify({ userId, postId: followId }),
   })
     .then((response) => {
       return response.json();
@@ -110,7 +110,7 @@ export const unFollow = (userId, token, unFollowId) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({  memberID:userId, followerID:unFollowId}),
+    body: JSON.stringify({ memberID: userId, followerID: unFollowId }),
   })
     .then((response) => {
       return response.json();

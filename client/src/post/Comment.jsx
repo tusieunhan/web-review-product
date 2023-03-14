@@ -1,7 +1,7 @@
 import { async } from "@firebase/util";
 import { configure } from "@testing-library/react";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import Load from "../components/load";
 import { useIsHidden } from "../hooks/useIsHidden";
@@ -15,8 +15,17 @@ function Comment({ post }) {
   const { isLogin, avatar } = useIsLogin();
   const [loading, setLoading] = useState(false);
   const [listComment, setListComment] = useState(null);
-  const [likes,setLikes] = useState(()=> post.likes.map((like)=>like.memberID).includes(isLogin.id));
-  const [total,setTotal] = useState(post.likes.length);
+  const [likes, setLikes] = useState(post.likes?.includes(isLogin._id));
+  const [total, setTotal] = useState(post.likes?.length);
+
+
+
+
+
+  useEffect(() => {
+    setTotal(post.likes?.length)
+    setLikes(post.likes?.includes(isLogin._id))
+  }, []);
 
   const [text, setText] = useState("");
   const onClickPostId = (id) => {
@@ -25,26 +34,23 @@ function Comment({ post }) {
     dispatch(getComment(id, setListComment));
     setLoading(false);
   };
-  console.log(post.likes.length)
-  const fomatDate = (date)=>{
+  const fomatDate = (date) => {
     const date1 = new Date(date);
     const date2 = new Date();
     const diffTime = Math.abs(date2 - date1);
-    let diffDays; 
-    if(diffTime > 3600000){
+    let diffDays;
+    if (diffTime > 3600000) {
       diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + ' ngày trước';
-    } else{
-      diffDays = Math.ceil(diffTime / (1000 * 60 )) + ' phút trước';
+    } else {
+      diffDays = Math.ceil(diffTime / (1000 * 60)) + ' phút trước';
     }
     return diffDays;
   }
 
-
-
-  const onClickLike = async(e)=>{
-     await like(isLogin.id, e)
-      setLikes(!likes)
-      setTotal(likes ? total - 1 : total + 1)
+  const onClickLike = async (e) => {
+    const res = await like(isLogin._id, e)
+    setLikes(!likes)
+    setTotal(likes ? total - 1 : total + 1)
   }
 
   const onComment = (e) => {
@@ -65,8 +71,8 @@ function Comment({ post }) {
     <div className="py-3 px-4 space-y-3">
       <div className="flex space-x-4 lg:font-bold">
         <button
-        onClick={()=>onClickLike(post.id)}
-        className={likes ? 'text-red-500 flex items-center space-x-2' : 'flex items-center space-x-2'} >
+          onClick={() => onClickLike(post._id)}
+          className={likes ? 'text-red-500 flex items-center space-x-2' : 'flex items-center space-x-2'} >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"

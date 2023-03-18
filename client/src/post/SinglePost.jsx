@@ -10,8 +10,6 @@ function SinglePost() {
   const { isLogin } = useIsLogin();
   const { postId } = useParams();
   const [post, setPost] = useState([]);
-  const [like, setLike] = useState(false);
-  const [likes, setLikes] = useState(0);
   const [comments, setComments] = useState([]);
 
   const [title, setTitle] = useState(post.title);
@@ -31,15 +29,10 @@ function SinglePost() {
     window.location.reload()
   }
 
-  const checkLike = (likes) => {
-    const userId = isAuthenticated() && isAuthenticated().user._id;
-    let match = likes.indexOf(userId) !== -1;
-    return match;
-  };
   useEffect(async () => {
     singlePost(postId).then((data) => {
-      if (data.error) {
-        console.log(data.error);
+      if (!data) {
+        console.log(data);
       } else {
         setIsAdmin(data.userId == isLogin._id)
         setPost(data);

@@ -8,6 +8,7 @@ import { useIsHidden } from "../hooks/useIsHidden";
 import { useIsLogin } from "../hooks/useIsLogin";
 import { getComment, postComment } from "../store/actions/post.action";
 import { like } from "../user/apiUser";
+import { likePost } from "./apiPost";
 
 function Comment({ post }) {
   const dispatch = useDispatch();
@@ -48,7 +49,8 @@ function Comment({ post }) {
   }
 
   const onClickLike = async (e) => {
-    const res = await like(isLogin._id, e)
+
+    await likePost(isLogin._id, e)
     setLikes(!likes)
     setTotal(likes ? total - 1 : total + 1)
   }

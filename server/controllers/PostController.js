@@ -30,7 +30,6 @@ export const getPost = async (req, res) => {
 //get list post by user
 export const getListPostUser = async (req, res) => {
   const id = req.params.id;
-  console.log(id);
   try {
     const post = await PostModel.find({ "userId": id });
     res.status(200).json(post);
@@ -54,14 +53,22 @@ export const updatePost = async (req, res) => {
   const { userId } = req.body;
 
   try {
-    const post = await PostModel.findById(postId);
-    if (post.userId === userId) {
-      await post.updateOne({ $set: req.body });
-      res.status(200).json("Post updated!");
-    } else {
-      res.status(403).json("Authentication failed");
-    }
-  } catch (error) { }
+    PostModel.findOneAndUpdate(
+      { _id: postId },
+      { title: req.body.title, desc: req.body.desc },
+      { new: true },
+      (err, updatedPost) => {
+        if (err) {
+          console.log(err);
+          res.status(500).send("Internal Server Error");
+        } else {
+          console.log(updatedPost);
+          res.status(200).send("Post Updated Successfully");
+        }
+      })
+  } catch (error) {
+    cosole.log(error)
+  }
 };
 
 // delete a post
@@ -69,15 +76,15 @@ export const deletePost = async (req, res) => {
   const id = req.params.id;
   const { userId } = req.body;
 
-  console.log(req.body);
-
   try {
     const post = await PostModel.findById(id);
     // if (post.userId === userId) {
     await post.deleteOne();
-    res.status(200).json("Post deleted.");
+    console.log("Post deleted");
+    //   res.status(200).json("Post deleted.");
     // } else {
     //   res.status(403).json("Action forbidden");
+    //   console.log("Action forbidden")
     // }
   } catch (error) {
     res.status(500).json(error);
@@ -87,7 +94,7 @@ export const deletePost = async (req, res) => {
 // like/dislike a post
 export const likePost = async (req, res) => {
   const { userId, postId } = req.body;
-  console.log(res.body);
+  console.log("like", userId);
   try {
     const post = await PostModel.findById(postId);
     if (post.likes.includes(userId)) {

@@ -9,7 +9,7 @@ function DataPost({ post }) {
   const { isLogin } = useIsLogin();
   const [isAdmin, setIsAdmin] = useState(post.userId == isLogin._id);
   const handleDel = async () => {
-    await remove(post._id, isLogin._id, isLogin.token)
+    await remove(post._id, isLogin._id)
     window.location.reload()
   }
 

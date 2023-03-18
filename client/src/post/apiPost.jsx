@@ -17,17 +17,7 @@ export const create = (userId, content, photo, isLogin, title) => {
     .catch((err) => console.log(err));
 };
 
-// export const list = () => {
-//     return fetch(`${process.env.REACT_APP_API_URL}/posts`, {
-//         method: "GET"
-//     })
-//         .then(response => {
-//             return response.json();
-//         })
-//         .catch(err => console.log(err));
-// };
 
-// with pagination
 export const list = (page) => {
   return fetch(`${process.env.REACT_APP_API_URL}/post?page=${page}&size=5`, {
     method: "GET",
@@ -67,18 +57,15 @@ export const listByUser = (userId, token) => {
     .catch((err) => console.log(err));
 };
 
-export const remove = (postId, userId, token) => {
-
-  console.log(postId, userId, token);
+export const remove = (postId, userId) => {
 
   return fetch(`${process.env.REACT_APP_API_URL}/posts/${postId}`, {
     method: "DELETE",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
     },
-    data: userId,
+    data: JSON.stringify(userId),
   })
     .then((response) => {
       return response.json();
@@ -87,12 +74,14 @@ export const remove = (postId, userId, token) => {
 };
 
 export const update = (postId, post) => {
+
   return fetch(`${process.env.REACT_APP_API_URL}/posts/${postId}`, {
-    method: "PUT",
+    method: "POST",
     headers: {
       Accept: "application/json",
+      "Content-Type": "application/json",
     },
-    body: post,
+    body: JSON.stringify({ ...post }),
   })
     .then((response) => {
       return response.json();
@@ -100,13 +89,12 @@ export const update = (postId, post) => {
     .catch((err) => console.log(err));
 };
 
-export const likePost = (userId, token, postId) => {
-  return fetch(`${process.env.REACT_APP_API_URL}/post/like`, {
-    method: "PUT",
+export const likePost = (userId, postId) => {
+  return fetch(`${process.env.REACT_APP_API_URL}/posts/like/unlike`, {
+    method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({ userId, postId }),
   })

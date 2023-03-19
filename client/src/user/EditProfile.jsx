@@ -73,7 +73,7 @@ function EditProfile() {
   return (
     <div className="container m-auto">
       <Link to={'/setting'} className="text-2xl leading-none text-gray-900 tracking-tight mt-3">
-        Account Setting
+        Cài đặt tài khoản
       </Link>
       {user === null || users === null ? (
         <Load />
@@ -127,7 +127,7 @@ function EditProfile() {
                           type="button"
                           className="button soft-warning small"
                         >
-                          Choose file
+                          Chọn ảnh
                         </button>
                       </>
                     )}
@@ -135,12 +135,12 @@ function EditProfile() {
                 </div>
               </div>
               <div className="px-4 py-3 -mx-5 -mb-4 mt-5 border-t text-sm dark:border-gray-500 dark:text-gray-500">
-                Your Photo size Must be Maxmium 999MB
+                Bạn chỉ có thể tải lên một tệp dưới 99MB <br />
               </div>
             </div>
             <div className="bg-white dark:bg-gray-900 rounded-md lg:shadow-lg shadow col-span-2 p-8 space-y-8 ">
               <div>
-                <label htmlFor> About</label>
+                <label htmlFor> Thông tin </label>
                 <input
                   type="text"
                   name="about"
@@ -151,7 +151,7 @@ function EditProfile() {
                 />
               </div>
               <div>
-                <label htmlFor>country</label>
+                <label htmlFor>Thành phố</label>
                 <input
                   type="text"
                   name="country"
@@ -191,11 +191,11 @@ function EditProfile() {
                       height: "40px",
                     }}
                   >
-                    Update Profile
+                    Cập nhập
                     <Load isSmall={true} />
                   </button>
                 ) : (
-                  <button className="button bg-blue-700">Update Profile</button>
+                  <button className="button bg-blue-700">Cập nhập</button>
                 )}
               </div>
             </div>

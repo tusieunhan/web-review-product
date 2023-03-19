@@ -22,6 +22,7 @@ const Profile = () => {
   };
 
 
+  console.log(isAuthenticated());
 
   useEffect(
     () => {
@@ -74,7 +75,7 @@ const Profile = () => {
             </div>
             <div className="lg:w/8/12 flex-1 flex flex-col lg:items-start items-center">
               <h2 className="font-semibold lg:text-2xl text-lg mb-2">
-                {users.username}
+                @{users.username}
               </h2>
               <p className="lg:text-left mb-2 text-center  dark:text-gray-100">
                 {users.about}
@@ -83,8 +84,7 @@ const Profile = () => {
                 users.createdAt
               ).toDateString()}`}</p>
               <div className="flex font-semibold mb-3 space-x-2  dark:text-gray-10">
-                <Link href="#">Travailing</Link> , <Link href="#">Sports</Link>{" "}
-                ,<Link href="#">Movies</Link>
+                <a href={`mailto:` + users.email}>{users.email}</a>
               </div>
               <div className="capitalize flex font-semibold space-x-3 text-center text-sm my-2">
                 {isAuthenticated().user &&
@@ -110,22 +110,12 @@ const Profile = () => {
                     onButtonClick={clickFollowButton}
                   />
                 )}
+
                 {isAuthenticated().user &&
-                  isAuthenticated().user.role === "admin" && (
-                    <div class="card mt-5">
+                  isAuthenticated().user.isAdmin && (
+                    <div class="card">
                       <div className="card-body">
-                        <h5 className="card-title">Admin</h5>
-                        <p className="mb-2 text-danger">
-                          Edit/Delete as an Admin
-                        </p>
-                        <Link
-                          className="btn btn-raised btn-success mr-5"
-                          to={`/user/edit/${users._id}`}
-                        >
-                          Chỉnh sủa thông tin
-                        </Link>
                         <DeleteUser userId={users._id} />
-                        <DeleteUser />
                       </div>
                     </div>
                   )}

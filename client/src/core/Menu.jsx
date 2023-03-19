@@ -8,7 +8,7 @@ const Menu = () => {
   const dispatch = useDispatch();
   const { isLogin, avatar } = useIsLogin();
   const history = useHistory();
-  const [text, setText] = useState("");
+  const [text, setText] = useState("all");
   function handleLogout(e) {
     e.preventDefault();
     dispatch(actLogout());
@@ -18,8 +18,9 @@ const Menu = () => {
     if (!text || text.length === 0) {
       return;
     }
+    window.location.href = `/search/${text}`;
     setText("");
-    history.push(`/users?text=${text}`);
+
   };
   return (
     <header>
@@ -69,7 +70,7 @@ const Menu = () => {
               name="add-circle"
               class="-mb-1 mr-1 opacity-90 text-xl uilus-circle"
             ></ion-icon>{" "}
-            Create new post
+            Tạo bài viết
           </Link>
 
           <div>
@@ -92,17 +93,17 @@ const Menu = () => {
             >
               <ul>
                 <li>
-                  <Link to={'/setting'}> Account setting </Link>
+                  <Link to={'/setting'}> Cập nhập thông tin  </Link>
                 </li>
                 <li>
-                  <Link href="#"> Payments </Link>
+                  <Link href="#"> Ví của bạn </Link>
                 </li>
                 <li>
-                  <Link href="#"> Help </Link>
+                  <Link href="#"> Trợ giúp mua hàng </Link>
                 </li>
                 <li>
                   <Link to="/signIn" onClick={handleLogout}>
-                    Log Out
+                    Đăng xuất
                   </Link>
                 </li>
               </ul>

@@ -91,16 +91,16 @@ const Profile = () => {
                   isAuthenticated().user._id === users._id ? (
                   <>
                     <Link
-                      className="bg-gray-300 shadow-sm p-2 px-6 rounded-md dark:bg-gray-700"
-                      to={`/post/create`}
-                    >
-                      Create Post
-                    </Link>
-                    <Link
                       className="bg-pink-500 shadow-sm p-2 pink-500 px-6 rounded-md text-white hover:text-white hover:bg-pink-600"
                       to={`/setting`}
                     >
-                      Edit Profile
+                      Chỉnh sửa thông tin
+                    </Link>
+                    <Link
+                      className="bg-pink-500 shadow-sm p-2 pink-500 px-6 rounded-md text-white hover:text-white hover:bg-pink-600"
+                      to={`/post/create`}
+                    >
+                      Tạo bài viết đánh giá
                     </Link>
                     <DeleteUser userId={users._id} />
                   </>
@@ -122,7 +122,7 @@ const Profile = () => {
                           className="btn btn-raised btn-success mr-5"
                           to={`/user/edit/${users._id}`}
                         >
-                          Edit Profile
+                          Chỉnh sủa thông tin
                         </Link>
                         <DeleteUser userId={users._id} />
                         <DeleteUser />
@@ -130,7 +130,7 @@ const Profile = () => {
                     </div>
                   )}
                 <div>
-                  <Link
+                  {/* <Link
                     href="#"
                     className="bg-gray-300 flex h-12 h-full items-center justify-center rounded-full text-xl w-9 dark:bg-gray-700"
                     aria-expanded="false"
@@ -190,7 +190,7 @@ const Profile = () => {
                         </Link>
                       </li>
                     </ul>
-                  </div>
+                  </div> */}
                 </div>
               </div>
 

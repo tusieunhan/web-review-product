@@ -119,7 +119,7 @@ export const unFollow = (userId, token, unFollowId) => {
 };
 
 export const findPeople = () => {
-  return fetch(`${process.env.REACT_APP_API_URL}/member?q=&page=1&size=5`, {
+  return fetch(`${process.env.REACT_APP_API_URL}/user`, {
     method: "GET",
     headers: {
       Accept: "application/json",

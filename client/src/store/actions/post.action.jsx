@@ -82,15 +82,15 @@ export const getComment = (id, setListComment) => {
     dispatch(startLoading());
     axios({
       method: "GET",
-      url: `${API_URL}/comment?id=${id}&page=1&size=5`,
+      url: `${API_URL}/comments/${id}`,
       headers: {
         "Content-Type": "application/json",
       },
       data: null,
     })
       .then((res) => {
-        console.log(res.data.list);
-        setListComment(res.data.list);
+        console.log(res.data);
+        setListComment(res.data.comments);
       })
       .catch((err) => { });
   };

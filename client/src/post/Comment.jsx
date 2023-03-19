@@ -1,6 +1,4 @@
-import { async } from "@firebase/util";
-import { configure } from "@testing-library/react";
-import axios from "axios";
+
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import Load from "../components/load";
@@ -18,9 +16,6 @@ function Comment({ post }) {
   const [listComment, setListComment] = useState(null);
   const [likes, setLikes] = useState(post.likes?.includes(isLogin._id));
   const [total, setTotal] = useState(post.likes?.length);
-
-
-
 
 
   useEffect(() => {
@@ -50,9 +45,10 @@ function Comment({ post }) {
 
   const onClickLike = async (e) => {
 
-    await likePost(isLogin._id, e)
-    setLikes(!likes)
-    setTotal(likes ? total - 1 : total + 1)
+    const res = await likePost(isLogin._id, e)
+    setLikes(res.likes?.includes(isLogin._id))
+    // setTotal(likes ? total - 1 : total + 1)
+    setTotal(res.likes?.length || 0)
   }
 
   const onComment = (e) => {
@@ -85,11 +81,11 @@ function Comment({ post }) {
           >
             <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
           </svg>
-          <div>  {total} Like</div>
+          <div>  {total} Thích </div>
         </button>
         <button
           className="flex items-center space-x-2"
-          onClick={() => onClickPostId(post.id)}
+          onClick={() => onClickPostId(post._id)}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -105,7 +101,7 @@ function Comment({ post }) {
               clipRule="evenodd"
             />
           </svg>
-          <div> Comment</div>
+          <div> {post?.comments?.length ? post?.comments?.length + " Người đã đánh giá" : "Đánh giá ngay"}</div>
         </button>
         <button className="flex items-center space-x-2 flex-1 justify-end">
           <svg
@@ -118,7 +114,7 @@ function Comment({ post }) {
           >
             <path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z" />
           </svg>
-          <div> Share</div>
+          <div> Chia sẽ ngay</div>
         </button>
       </div>
       {hidden && (
@@ -136,14 +132,15 @@ function Comment({ post }) {
                           <div className="flex" key={i}>
                             <div className="w-10 h-10 rounded-full relative flex-shrink-0">
                               <img
-                                src={comment.image ? comment.image : 'https://firebasestorage.googleapis.com/v0/b/bakery-9a92d.appspot.com/o/images%2Favatardefault_92824.webp0049579c-755c-41f3-9785-e443b6b03679?alt=media&token=17bf565a-0fbf-4b5a-afa8-6866564608c7'}
+                                src={comment.avatar ? comment.avatar : 'https://firebasestorage.googleapis.com/v0/b/bakery-9a92d.appspot.com/o/images%2Favatardefault_92824.webp0049579c-755c-41f3-9785-e443b6b03679?alt=media&token=17bf565a-0fbf-4b5a-afa8-6866564608c7'}
                                 alt=""
                                 className="absolute h-full rounded-full w-full"
                               />
                             </div>
                             <div className="text-gray-700 py-2 px-3 rounded-md bg-gray-100 h-full relative lg:ml-5 ml-2 lg:mr-20  dark:bg-gray-800 dark:text-gray-100">
+                              <p className="font-bold">@{comment.username}  -  <span className="text-sm opacity-50 font-light">{fomatDate(comment.dateNow)}</span></p>
                               <p className="leading-6">
-                                {comment.commentDetail} -  <spam className="text-sm opacity-50">{fomatDate(comment.createDate)}</spam>
+                                {comment.comment}
                                 <i className="uil-grin-tongue-wink"> </i>
                               </p>
                               <div className="absolute w-3 h-3 top-3 -left-1 bg-gray-100 transform rotate-45 dark:bg-gray-800" />

@@ -43,8 +43,8 @@ function DataPost({ post }) {
 
         <Link to={`/post/${post._id}`}>
           <h2 className="px-4 py-1 font-bold text-lg">{post?.title}</h2>
-          <div className="px-4 py-3 max-h-[500px] w-full object-cover overflow-hidden rounded-md">
-            <img src={post.image} alt="" />
+          <div className=" py-6 max-h-[500px] w-full object-cover overflow-hidden">
+            <img src={post.image} alt="" className="w-full h-full object-contain " />
           </div>
         </Link>
       </div>

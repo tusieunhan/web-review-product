@@ -78,9 +78,10 @@ const Sidebar = () => {
           </div>
           <Link
             to={`/user/${isLogin.id}`}
-            className="text-xl font-medium capitalize mt-4 uk-link-reset"
+            className="text-xl text-center font-medium capitalize mt-4 uk-link-reset"
           >
-            {`${isLogin.username}`}
+            {`@${isLogin.username}`}
+            <p className="text-sm font-light">{isLogin.email}</p>
           </Link>
         </div>
         <hr className="-mx-4 -mt-1 uk-visible@s" />
@@ -108,11 +109,11 @@ const Sidebar = () => {
 		C244.955,413.993,233.974,422.218,221.109,422.218z"
                 />
               </svg>
-              <span> Feed </span>
+              <span> Cách bài đánh giá </span>
             </Link>
           </li>
-          <li className={isActive(`/users`)}>
-            <Link to={`/users`}>
+          <li className={isActive(`/search`)}>
+            <Link to={`/search`}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -126,10 +127,10 @@ const Sidebar = () => {
                   d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                 />
               </svg>
-              <span> Explore </span>
+              <span> Tìm kiếm sản phẩm </span>
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="#">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -144,7 +145,7 @@ const Sidebar = () => {
               </svg>
               <span> Messages </span> <span className="nav-tag"> 3</span>
             </Link>
-          </li>
+          </li> */}
           <li className={isActive("/trending")}>
             <Link to="/trending">
               <svg
@@ -166,7 +167,7 @@ const Sidebar = () => {
                   d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z"
                 />
               </svg>
-              <span> Trending </span>
+              <span> Sản phẩm thịnh hành </span>
             </Link>
           </li>
           <li>
@@ -181,7 +182,7 @@ const Sidebar = () => {
               >
                 <path d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0zM1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5zM4 15h3v-5H4v5zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3zm3 0h-2v3h2v-3z" />
               </svg>
-              <span> Marketplace </span>
+              <span> Mua sản phẩm tốt</span>
             </Link>
           </li>
           <li className={isActive(`/setting`)}>
@@ -205,7 +206,7 @@ const Sidebar = () => {
                   d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
                 />
               </svg>
-              <span> Settings </span>
+              <span> Cập nhận thông tin </span>
             </Link>
           </li>
           <li className={isActive(`/user/${isLogin._id}`)}>
@@ -223,7 +224,7 @@ const Sidebar = () => {
                   d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
                 />
               </svg>
-              <span> My Profile </span>
+              <span> Trang cá nhân </span>
             </Link>
           </li>
           <li>
@@ -244,7 +245,7 @@ const Sidebar = () => {
                   d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
                 />
               </svg>
-              <span> Logout </span>
+              <span> Đăng xuất </span>
             </Link>
           </li>
         </ul>

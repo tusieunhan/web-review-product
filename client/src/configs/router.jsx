@@ -22,7 +22,7 @@ export const mainRouter = [
     Component: Home,
   },
   {
-    path: "/users",
+    path: "/search",
     exact: false,
     Component: Users,
   },

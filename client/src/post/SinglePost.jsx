@@ -81,12 +81,11 @@ function SinglePost() {
           <h5 contentEditable={!edit} onInput={(e) => setTitle(e.target.innerText)} className="px-4 text-3xl">{post.title}</h5>
 
           <Link >
-            <div className="px-4 py-3 max-h-[500px] w-full object-cover overflow-hidden rounded-md">
-              <img src={post.image} alt="" />
+            <div className="px-4 py-3 max-h-[700px] w-full object-cover overflow-hidden rounded-md">
+              <img src={post.image} alt="" className="h-full w-full object-cover" />
             </div>
           </Link>
           <div className="p-4 ">
-
             <div onInput={(e) => setDesc(e.target.innerHTML)} contentEditable={!edit} dangerouslySetInnerHTML={{ __html: post.desc }}></div>
           </div>
 

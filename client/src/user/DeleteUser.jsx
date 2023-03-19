@@ -38,9 +38,9 @@ class DeleteUser extends Component {
     return (
       <button
         onClick={this.deleteConfirmed}
-        className="bg-pink-500 shadow-sm p-2 pink-500 px-6 rounded-md text-white hover:text-white hover:bg-pink-600"
+        className="text-red-500  p-2  px-6 rounded-md "
       >
-        Delete Profile
+        Xoá tài khoản
       </button>
     );
   }

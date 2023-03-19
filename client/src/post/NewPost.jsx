@@ -157,7 +157,7 @@ function NewPost() {
                 to="#"
                 className="p-2 px-4 rounded bg-gray-50 text-red-500"
               >
-                Cancel
+                Thoát
               </Link>
               {loading ? (
                 <button
@@ -170,11 +170,11 @@ function NewPost() {
                     height: "40px",
                   }}
                 >
-                  Update Profile
+                  Đăng ngay
                   <Load isSmall={true} />
                 </button>
               ) : (
-                <button className="button bg-blue-700">Update Profile</button>
+                <button className="button bg-blue-700">Đăng ngay</button>
               )}
             </div>
           </div>

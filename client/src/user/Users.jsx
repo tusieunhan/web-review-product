@@ -1,80 +1,71 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import useQuery from "../hooks/useQuery";
 import Load from "../components/load";
-import axios from "axios";
+import './user.css'
 
 function Users() {
-  const query = useQuery();
-  const text = query.get("text");
-  const [data, setData] = useState({
-    list: [],
-  });
+
+  const url = window.location.href;
+  const [text, setText] = useState(url.split("/")[4]);
   const [loading, setLoading] = useState(false);
+  const [data, setData] = useState([]);
   useEffect(() => {
+
+    console.log("text", text)
     const fetchData = async () => {
       setLoading(true);
-      fetch(`${process.env.REACT_APP_API_URL}/member?q=${text}&page=1&size=5`, {
+      fetch(`${process.env.REACT_APP_API_URL}/posts/search/${text ? text : 'all'}`, {
         method: "GET",
       })
         .then((response) => response.json())
         .then((result) => {
-          setData((data) => ({
-            ...data,
-            list: result.list,
-          }));
+          console.log(result);
+          setData(result)
           setLoading(false);
         })
         .catch((err) => {
-          console.log(err);
           setLoading(false);
         });
     };
     fetchData();
   }, [text]);
 
-  useEffect( async() => {
 
-    let data = await axios.get(`${process.env.REACT_APP_API_URL}/member?q=&page=1&size=20`)
-    if(data){
-      console.log(data.data)
-    }
-      
-    });
 
 
   return (
     <div className="container pro-container m-auto">
-      <h2 className="mt-5 mb-5">Users : {text}</h2>
-      <div className="my-6 grid lg:grid-cols-3 grid-cols-2 gap-1.5">
+      <h2 className="mt-5 mb-5">{text === 'all' ? "Các bài viết đề xuất cho bạn" : "Bài viết với từ khoá " + text + " cho bạn"}</h2>
+      <div className="my-6 grid lg:grid-cols-3 grid-cols-2 gap-6">
         {!loading ? (
-          data.list && data.list.length !== 0 ? (
+          data && data.length !== 0 ? (
             <>
-              {data.list.map((user) => (
-                <div>
-                  <div className="bg-red-500 max-w-full lg:h-64 h-40 rounded-md relative overflow-hidden uk-transition-toggle">
+              {data.map((user) => (
+                <Link to={`/post/${user._id}`}>
+                  <div className="group bg-red-transparent max-w-full lg:h-64 h-40 rounded-md relative overflow-hidden uk-transition-toggle">
                     <img
-                      className="w-full h-full absolute object-cover inset-0"
-                      src={`${user.avatar}`}
+                      className="w-full h-full absolute object-cover inset-0 hover:scale-110 transform transition duration-500 ease-in-out"
+                      src={`${user.image}`}
                       onError={(i) =>
                         (i.target.src = `https://source.unsplash.com/random/?bakery,bake,${user.name}`)
                       }
                       alt={user.name}
                     />
                   </div>
-                  <div className="card-body">
-                    <h5 className="card-title">{user.name}</h5>
-                    <p className="card-text" style={{ lineHeight: "40px" }}>
-                      {user.email}
-                    </p>
-                    <Link
-                      to={`/user/${user.id}`}
-                      className="bg-pink-500 font-bold hover:bg-pink-600 hover:text-white px-6 py-3  rounded text-sm text-white to-pink-600"
-                    >
-                      View Profile
-                    </Link>
+                  <div className="flex gap-4 mt-6">
+
+                    <img className='w-10 h-10 rounded-full object-cover overflow-hidden' src={user.avatar} alt=""
+                      onError={(i) =>
+                        (i.target.src = `https://source.unsplash.com/random/?bakery,bake,${user.name}`)
+                      }
+                    />
+                    <div className="  flex-1 card-body">
+                      <h5 className="card-title mb-2 font-bold text-lg text">{user.title}</h5>
+                      <div className="card-text text" style={{ lineHeight: "40px" }} dangerouslySetInnerHTML={{ __html: user.desc }}></div>
+                    </div>
+
                   </div>
-                </div>
+                </Link>
               ))}
             </>
           ) : (
@@ -86,7 +77,7 @@ function Users() {
           </div>
         )}
       </div>
-    </div>
+    </div >
   );
 }
 

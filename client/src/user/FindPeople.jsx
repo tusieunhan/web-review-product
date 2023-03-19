@@ -3,48 +3,38 @@ import { findPeople } from "./apiUser";
 import { Link } from "react-router-dom";
 
 function FindPeople() {
-  const [users, setUsers] = useState({list:[]});
+  const [users, setUsers] = useState([]);
   useEffect(
     () => {
       findPeople().then((data) => {
         if (data) {
+          console.log(data);
           setUsers(data);
         }
       });
     },
-    // eslint-disable-next-line
+
     []
   );
-  // const clickFollow = (user) => {
-  //   const userId = isAuthenticated().user._id;
-  //   const token = isAuthenticated().token;
-  //   follow(userId, token, user._id).then((data) => {
-  //     if (data.error) {
-  //       console.log(data.error);
-  //     } else {
-  //       setUsers(users.filter((elm) => elm._id !== user._id));
-  //     }
-  //   });
-  // };
 
   return (
     <div className="lg:w-5/12">
       <div className="uk-sticky" uk-sticky="offset:90; bottom:true ; media @m">
         <div className="bg-white dark:bg-gray-900 shadow-md rounded-md overflow-hidden">
           <div className="bg-gray-50 dark:bg-gray-800 border-b border-gray-100 flex items-baseline justify-between py-4 px-6 dark:border-gray-800">
-            <h2 className="font-semibold text-lg">Who to follow</h2>
+            <h2 className="font-semibold text-lg">Người dùng nổi bật</h2>
             <Link to="#"> Refresh</Link>
           </div>
           <div className="divide-gray-300 divide-gray-50 divide-opacity-50 divide-y px-4 dark:divide-gray-800 dark:text-gray-100">
             {users &&
-              users.list?.map((user, i) => (
+              users?.map((user, i) => i < 5 && (
                 <div className="flex items-center justify-between py-3" key={i}>
                   <div className="flex flex-1 items-center space-x-4">
-                    <Link to={`/user/${user.id}`}>
+                    <Link to={`/user/${user._id}`}>
                       <img
                         src={`${user.avatar}`}
                         onError={(i) =>
-                          (i.target.src = `https://source.unsplash.com/random/?bakery,bake,${user.username}`)
+                          (i.target.src = `https://i.imgur.com/6VBx3io.png`)
                         }
                         alt={user.name}
                         className="bg-gray-200 rounded-full w-10 h-10"
@@ -52,26 +42,26 @@ function FindPeople() {
                     </Link>
                     <div className="flex flex-col ">
                       <span className="block capitalize font-semibold text-gray-500 dark:text-gray-100">
-                        {user.name}
+                        @{user.username}
                       </span>
                       <span className="block capitalize text-sm text-gray-500 dark:text-gray-100  ">
                         {user.email}
                       </span>
                     </div>
                   </div>
-                  <button
+                  <Link to={`/user/${user._id}`}
                     // onClick={() => clickFollow(user)}
-                    className="border border-gray-200 font-semibold px-4 py-1 rounded-full hover:bg-pink-600 hover:text-white hover:border-pink-600 dark:border-gray-800"
+                    className="border border-gray-200 font-semibold px-4 py-1 rounded-full bg-pink-600 text-white hover:border-pink-600 dark:border-gray-800"
                   >
-                   
-                  </button>
+                    Xem
+                  </Link>
                 </div>
               ))}
           </div>
         </div>
         <div className="bg-white dark:bg-gray-900 shadow-md rounded-md overflow-hidden mt-5">
           <div className="bg-gray-50 border-b border-gray-100 flex items-baseline justify-between py-4 px-6 dark:bg-gray-800 dark:border-gray-700">
-            <h2 className="font-semibold text-lg">Latest</h2>
+            <h2 className="font-semibold text-lg">Các bài viết đề xuất</h2>
             <Link to="#"> See all</Link>
           </div>
           <div className="grid grid-cols-2 gap-2 p-3 uk-link-reset">

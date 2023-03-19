@@ -8,7 +8,7 @@ class PostByUser extends Component {
       <>
         <div class="flex items-center justify-between mt-8 space-x-3">
           <h1 class="flex-1 font-extrabold leading-none lg:text-2xl text-lg text-gray-900 tracking-tight uk-heading-line">
-            <span>Explore</span>
+            <span>Bài viết của người dùng </span>
           </h1>
           <div class="bg-white border border-2 border-gray-300 divide-gray-300 divide-x flex rounded-md shadow-sm dark:bg-gray-100">
             <Link
@@ -50,12 +50,12 @@ class PostByUser extends Component {
             </Link>
           </div>
         </div>
-        <div className="my-6 grid lg:grid-cols-4 grid-cols-2 gap-1.5 hover:text-yellow-700 uk-link-reset">
+        <div className="my-6 grid lg:grid-cols-4 grid-cols-2 gap-6 hover:text-yellow-700 uk-link-reset">
           {posts?.length > 0
             ? posts?.map((post, i) => (
               <Link to={`/post/${post._id}`} key={i}>
                 <div
-                  className="bg-red-500 max-w-full radio w-full h-full rounded-md relative overflow-hidden uk-transition-toggle"
+                  className="max-w-full radio w-full h-full rounded-md relative overflow-hidden uk-transition-toggle"
                   tabIndex={0}
                 >
                   {post.image && (

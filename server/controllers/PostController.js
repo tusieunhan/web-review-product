@@ -148,3 +148,27 @@ export const getTimelinePosts = async (req, res) => {
     res.status(500).json(error);
   }
 };
+
+
+export const searchPosts = async (req, res) => {
+  const keyword = req.params.id;
+
+  if (keyword == "all") {
+    const posts = await PostModel.find();
+    return res.status(200).json(posts);
+  }
+  try {
+    const posts = await PostModel.find({
+      $or: [
+        { title: { $regex: keyword, $options: "i" } },
+        { desc: { $regex: keyword, $options: "i" } },
+      ],
+    });
+    console.log(posts);
+    res.status(200).json(posts);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+

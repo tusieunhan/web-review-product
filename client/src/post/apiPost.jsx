@@ -19,7 +19,7 @@ export const create = (userId, content, photo, isLogin, title) => {
 
 
 export const list = (page) => {
-  return fetch(`${process.env.REACT_APP_API_URL}/post?page=${page}&size=5`, {
+  return fetch(`${process.env.REACT_APP_API_URL}/posts?page=${page}&size=5`, {
     method: "GET",
   })
     .then((response) => {
@@ -29,7 +29,7 @@ export const list = (page) => {
     .catch((err) => console.log(err));
 };
 export const listAll = async () => {
-  return await (await axios.get(`${process.env.REACT_APP_API_URL}/post?page=1&size=30`)).data.list;
+  return await (await axios.get(`${process.env.REACT_APP_API_URL}/posts`)).data;
 };
 
 export const singlePost = (postId) => {

@@ -94,15 +94,15 @@ const Profile = () => {
                       className="bg-pink-500 shadow-sm p-2 pink-500 px-6 rounded-md text-white hover:text-white hover:bg-pink-600"
                       to={`/setting`}
                     >
-                      Chỉnh sửa thông tin
+                      Sửa thông tin
                     </Link>
                     <Link
                       className="bg-pink-500 shadow-sm p-2 pink-500 px-6 rounded-md text-white hover:text-white hover:bg-pink-600"
                       to={`/post/create`}
                     >
-                      Tạo bài viết đánh giá
+                      Tạo bài viết
                     </Link>
-                    <DeleteUser userId={users._id} />
+                    {/* <DeleteUser userId={users._id} /> */}
                   </>
                 ) : (
                   <FollowProfileButton

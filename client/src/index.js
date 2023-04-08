@@ -7,6 +7,8 @@ import "./index.css";
 import "./assets/css/style.css";
 import "./assets/css/tailwind.css";
 import "./assets/css/uikit.css";
+
+
 ReactDOM.render(
   <Provider store={store}>
     <App />

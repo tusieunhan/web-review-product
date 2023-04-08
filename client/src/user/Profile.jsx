@@ -120,67 +120,6 @@ const Profile = () => {
                     </div>
                   )}
                 <div>
-                  {/* <Link
-                    href="#"
-                    className="bg-gray-300 flex h-12 h-full items-center justify-center rounded-full text-xl w-9 dark:bg-gray-700"
-                    aria-expanded="false"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      class="bi bi-caret-down-fill"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                    </svg>
-                  </Link>
-                  <div
-                    className="bg-white w-56 shadow-md mx-auto p-2 mt-12 rounded-md text-gray-500 hidden text-base dark:bg-gray-900 uk-drop"
-                    uk-drop="mode: click"
-                  >
-                    <ul className="space-y-1">
-                      <li>
-                        <Link
-                          href="#"
-                          className="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-700"
-                        >
-                          <i className="uil-user-minus mr-2" />
-                          Unfriend
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          href="#"
-                          className="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-700"
-                        >
-                          <i className="uil-eye-slash  mr-2" />
-                          Hide Your Story
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          href="#"
-                          className="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-700"
-                        >
-                          <i className="uil-share-alt mr-2" /> Share This
-                          Profile
-                        </Link>
-                      </li>
-                      <li>
-                        <hr className="-mx-2 my-2  dark:border-gray-700" />
-                      </li>
-                      <li>
-                        <Link
-                          href="#"
-                          className="flex items-center px-3 py-2 text-red-500 hover:bg-red-100 hover:text-red-500 rounded-md dark:hover:bg-red-600"
-                        >
-                          <i className="uil-stop-circle mr-2" /> Block
-                        </Link>
-                      </li>
-                    </ul>
-                  </div> */}
                 </div>
               </div>
 

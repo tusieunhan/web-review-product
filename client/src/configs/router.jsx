@@ -14,6 +14,8 @@ import ContentSignUp from "../page/sign/ContentSignUp";
 import { ErrPage } from "../page/err";
 import LandingPage from "./../page/landing/index";
 import Trending from "../trending";
+import Market from "../market";
+import Members from "../members/index";
 
 export const mainRouter = [
   {
@@ -27,9 +29,19 @@ export const mainRouter = [
     Component: Users,
   },
   {
+    path: "/members",
+    exact: false,
+    Component: Members,
+  },
+  {
     path: "/trending",
     exact: false,
     Component: Trending,
+  },
+  {
+    path: "/market",
+    exact: false,
+    Component: Market,
   },
   {
     path: "/post/create",

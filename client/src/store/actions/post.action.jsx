@@ -97,10 +97,9 @@ export const getComment = (id, setListComment) => {
 };
 
 export const postComment = (
-  commentDetail,
-  image,
-  memberID,
-  id,
+  text,
+  userId,
+  postId,
   setListComment,
   listComment
 ) => {
@@ -108,23 +107,19 @@ export const postComment = (
     dispatch(startLoading());
     axios({
       method: "POST",
-      url: `${API_URL}/comment`,
+      url: `${API_URL}/comments`,
       headers: {
         "Content-Type": "application/json",
       },
       data: {
-        commentDetail,
-        image,
-        member: {
-          id: memberID,
-        },
-        post: {
-          id: id
-        },
+        comment: text,
+        userId,
+        postId
       },
     })
       .then((res) => {
-        setListComment([...listComment, res.data]);
+        console.log(res.data);
+        setListComment([...res.data]);
       })
       .catch((err) => {
         console.log(err);

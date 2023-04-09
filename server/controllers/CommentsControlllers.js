@@ -4,6 +4,8 @@ import UserModel from '../models/userModel.js';
 
 export const createComment = async (req, res) => {
     const { postId, userId, comment } = req.body;
+
+    if (!postId || !userId || !comment) return
     try {
         const user = await UserModel.findById({ _id: userId });
         const dateNow = new Date();
@@ -14,7 +16,7 @@ export const createComment = async (req, res) => {
             { new: true }
         ).populate('comments');
 
-        return res.status(200).json({ post });
+        return res.status(200).json([...post.comments]);
     } catch (error) {
         res.status(400).json("Lỗi không xác định", { error });
     }

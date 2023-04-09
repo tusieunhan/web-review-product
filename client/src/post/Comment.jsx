@@ -18,6 +18,7 @@ function Comment({ post }) {
   const [total, setTotal] = useState(post.likes?.length);
 
 
+
   useEffect(() => {
     setTotal(post.likes?.length)
     setLikes(post.likes?.includes(isLogin._id))
@@ -46,9 +47,8 @@ function Comment({ post }) {
   const onClickLike = async (e) => {
 
     const res = await likePost(isLogin._id, e)
-    setLikes(res.likes?.includes(isLogin._id))
-    // setTotal(likes ? total - 1 : total + 1)
-    setTotal(res.likes?.length || 0)
+    setLikes(!res.likes?.includes(isLogin._id))
+    setTotal(likes ? total - 1 : total + 1)
   }
 
   const onComment = (e) => {
@@ -56,9 +56,8 @@ function Comment({ post }) {
     dispatch(
       postComment(
         text,
-        avatar,
-        isLogin.id,
-        post.id,
+        isLogin._id,
+        post._id,
         setListComment,
         listComment
       )

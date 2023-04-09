@@ -157,13 +157,15 @@ export const searchPosts = async (req, res) => {
     const posts = await PostModel.find();
     return res.status(200).json(posts);
   }
+
   try {
-    const posts = await PostModel.find({
-      $or: [
-        { title: { $regex: keyword, $options: "i" } },
-        { desc: { $regex: keyword, $options: "i" } },
-      ],
-    });
+    const posts = await PostModel.find({ $text: { $search: keyword } });
+    // const posts = await PostModel.find({
+    //   $or: [
+    //     { title: { $regex: keyword, $options: "i" } },
+    //     { desc: { $regex: keyword, $options: "i" } },
+    //   ],
+    // });
     console.log(posts);
     res.status(200).json(posts);
   } catch (error) {

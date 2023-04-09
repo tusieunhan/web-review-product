@@ -19,7 +19,7 @@ const postSchema = mongoose.Schema(
     timestamps: true,
   }
 );
-
+postSchema.index({ title: "text", desc: "text" });
 var PostModel = mongoose.model("Posts", postSchema);
 
 export default PostModel;

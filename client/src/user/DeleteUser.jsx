@@ -33,7 +33,7 @@ class DeleteUser extends Component {
 
   render() {
     if (this.state.redirect) {
-      return <Redirect to="/" />;
+      window.location.reload()
     }
     return (
       <button

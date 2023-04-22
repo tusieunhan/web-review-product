@@ -44,9 +44,9 @@ function AdminTemplate() {
     <>
       <header className="px-10 font-bold text-pink-500">
         <div className="flex items-center justify-between w-full">
-          <a href="/">Back to home </a>
-          <p className="text-3xl font-bold">
-            Admin
+          <a href="/">Quay lại trang chủ </a>
+          <p className="text-2xl font-bold uppercase">
+            Trang quản trị
           </p>
         </div>
 
@@ -76,6 +76,7 @@ function AdminTemplate() {
             {/* {tab === 3 && <Post arr={posts} />}
             {tab === 4 && <Post arr={posts} />}
             {tab === 5 && <Post arr={posts} />} */}
+
 
           </div>
         </div>

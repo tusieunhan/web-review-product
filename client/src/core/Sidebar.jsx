@@ -170,7 +170,7 @@ const Sidebar = () => {
               <span> Sản phẩm thịnh hành </span>
             </Link>
           </li>
-          <li className={isActive(`/market`)}>
+          {/* <li className={isActive(`/market`)}>
             <Link to={'/market'}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -184,7 +184,7 @@ const Sidebar = () => {
               </svg>
               <span> Mua sản phẩm tốt</span>
             </Link>
-          </li>
+          </li> */}
           <li className={isActive(`/setting`)}>
             <Link to={`/setting`}>
               <svg

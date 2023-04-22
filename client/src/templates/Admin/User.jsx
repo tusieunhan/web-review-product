@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import DeleteUser from "../../user/DeleteUser";
 
 export default function ItemUser({ arr }) {
     return (
@@ -35,9 +35,9 @@ export default function ItemUser({ arr }) {
                             Xem
                         </Link>
                         <div
-                            className="border ml-4 hover:border-pink-300 border-gray-200 font-semibold px-4 py-1 rounded-full text-red-600  cursor-pointer"
+                            className="border ml-4 hover:border-pink-300 border-gray-200 font-semibold rounded-full text-red-600  cursor-pointer"
                         >
-                            Xoá
+                            <DeleteUser userId={user._id} />
                         </div>
                     </div>
                 ))}

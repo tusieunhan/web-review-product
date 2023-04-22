@@ -45,7 +45,7 @@ export const loginUser = async (req, res) => {
         res.status(400).json("wrong password");
       } else {
         const token = jwt.sign(
-          { username: user.username, id: user._id },
+          { username: user.username, id: user._id, isAdmin: user.isAdmin },
           "process.env.JWTKEY",
           { expiresIn: "1h" }
         );

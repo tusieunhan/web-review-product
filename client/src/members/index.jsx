@@ -4,9 +4,9 @@ export default function Members() {
     return (
         <div className="p-12">
             <div className='text-center lg:text-2xl my-10'>
-                <h1 class="font-extrabold leading-none mb-6 mt-8  text-lg text-gray-900 tracking-tight "> Giới thiệu đề tài khóa luận </h1>
-                <strong >XÂY DỰNG HỆ THỐNG ĐÁNH GIÁ SẢN PHẨM TRÊN NỀN TẢNG AWS</strong>
-                <h1>ThS.Trương Bá Phúc</h1>
+                <h1 class="font-extrabold leading-none my-8  text-lg text-gray-900 tracking-tight "> Giới thiệu đề tài khóa luận </h1>
+                <strong className="py-2">XÂY DỰNG HỆ THỐNG ĐÁNH GIÁ SẢN PHẨM TRÊN NỀN TẢNG AWS</strong>
+                <h1 className="text-pink-500 text-2xl">ThS.Trương Bá Phúc</h1>
             </div>
             <div className='flex flex-col lg:flex-row flex-nowrap border-b-4 py-6'>
                 <div className="px-10" >

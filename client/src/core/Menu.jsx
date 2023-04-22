@@ -62,6 +62,18 @@ const Menu = () => {
           </form>
         </div>
         <div className="right-side lg:pr-4">
+          {isLogin.isAdmin &&
+
+            <Link
+              to={`/admin`}
+              className="border-pink-600 border font-bold text-pink-600  lg:block max-h-10 mr-4 px-4 py-2 rounded"
+            >
+
+              Trang quản trị
+            </Link>
+          }
+
+
           <Link
             to={`/post/create`}
             className="bg-pink-500 font-bold hover:bg-pink-600 hover:text-white lg:block max-h-10 mr-4 px-4 py-2 rounded text-white"

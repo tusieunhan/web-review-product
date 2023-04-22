@@ -94,12 +94,12 @@ export const deletePost = async (req, res) => {
 // like/dislike a post
 export const likePost = async (req, res) => {
   const { userId, postId } = req.body;
-  console.log("like", userId);
   try {
     const post = await PostModel.findById(postId);
     if (post.likes.includes(userId)) {
       await post.updateOne({ $pull: { likes: userId } });
       res.status(200).json(post);
+
     } else {
       await post.updateOne({ $push: { likes: userId } });
       res.status(200).json(post);

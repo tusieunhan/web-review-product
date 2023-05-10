@@ -10,7 +10,9 @@ import AuthRoute from './routes/AuthRoute.js'
 import UserRoute from './routes/UserRoute.js'
 import PostRoute from './routes/PostRoute.js'
 import UploadRoute from './routes/UploadRoute.js'
-// import CommentsRoute from './routes/Comments.js'
+import CommentsRoute from './routes/CommentsRoute.js'
+import postReportRoute from './routes/PostsReport.js'
+import useReportRoute from './routes/userReport.js'
 
 
 const app = express();
@@ -34,5 +36,7 @@ mongoose
 app.use('/auth', AuthRoute);
 app.use('/user', UserRoute)
 app.use('/posts', PostRoute)
-// app.use('/comments', CommentsRoute)
+app.use('/postsreport', postReportRoute)
+app.use('/usersreport', useReportRoute)
+app.use('/comments', CommentsRoute)
 app.use('/upload', UploadRoute)

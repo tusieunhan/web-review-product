@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import DeleteUser from "../../user/DeleteUser";
 
-export default function ItemUser({ arr }) {
+export default function ItemUser({ arr, handelUser, report }) {
     return (
         <div className="">
             <h1 className="text-pink-500 font-bold mb-4 text-2xl">Danh sách người dùng</h1>
@@ -34,6 +34,13 @@ export default function ItemUser({ arr }) {
                         >
                             Xem
                         </Link>
+
+                        {report && (<button
+                            onClick={() => handelUser(user._id)}
+                            className="border cursor-pointer ml-4 hover:border-pink-300 border-gray-200 font-semibold rounded-full bg-green-600 text-white px-3 py-1  cursor-pointer"
+                        >
+                            Loại bỏ
+                        </button>)}
                         <div
                             className="border ml-4 hover:border-pink-300 border-gray-200 font-semibold rounded-full text-red-600  cursor-pointer"
                         >

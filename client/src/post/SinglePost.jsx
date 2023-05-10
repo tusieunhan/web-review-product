@@ -5,6 +5,9 @@ import { isAuthenticated } from "../auth";
 import Comment from "./Comment";
 import { update } from "./apiPost"
 import { useDispatch } from "react-redux";
+import axios from "axios";
+
+
 
 
 import Load from "../components/load";
@@ -14,6 +17,9 @@ import { getComment, postComment } from "../store/actions/post.action";
 
 
 function SinglePost() {
+
+  const API_URL = process.env.REACT_APP_API_URL;
+
   const dispatch = useDispatch();
 
   const { isLogin } = useIsLogin();
@@ -62,6 +68,7 @@ function SinglePost() {
   const [listComment, setListComment] = useState(null);
   const [likes, setLikes] = useState(false);
   const [total, setTotal] = useState(0);
+  const [report, setreport] = useState(false);
 
 
 
@@ -89,6 +96,16 @@ function SinglePost() {
     const res = await likePost(isLogin._id, e)
     setLikes(!res.likes.includes(isLogin._id))
     setTotal(likes ? total - 1 : total + 1)
+  }
+
+  const handleReport = (id) => {
+    setreport(true)
+    axios({
+      method: "POST",
+      url: `${API_URL}/postsreport/${id}`,
+    }).then(() => {
+      alert('Báo cáo thành công')
+    })
   }
 
   const onComment = (e) => {
@@ -127,6 +144,7 @@ function SinglePost() {
               {new Date(post.createdAt).toDateString()}
             </span>
           </div>
+          <button onClick={() => handleReport(post._id)} className="mr-2 hover:text-red-600 cursor-pointer ">{!report ? 'Báo cáo' : "Đã báo cáo"}</button>
           {isAdmin && (
             <>
               {!edit && <div onClick={handleSave} className="p-2 mr-1 rounded-sm hover:text-pink-500  cursor-pointer"> <svg width='18px' height='18px' fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M470.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L192 338.7 425.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" /></svg></div>}
@@ -198,7 +216,7 @@ function SinglePost() {
               >
                 <path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z" />
               </svg>
-              <div> Chia sẽ ngay</div>
+              <a href={`http://www.facebook.com/share.php?u=${encodeURIComponent(window.location.href)}`} > Chia sẽ ngay</a>
             </button>
           </div>
           {hidden && (

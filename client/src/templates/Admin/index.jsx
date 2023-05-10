@@ -12,7 +12,9 @@ const API_URL = process.env.REACT_APP_API_URL;
 function AdminTemplate() {
   const isAdmin = isAuthenticated();
   const [users, setUsers] = useState([]);
+  const [usersReport, setUsersReport] = useState([]);
   const [posts, setPosts] = useState([]);
+  const [postsReport, setPostsReport] = useState([]);
   const [tab, setTab] = useState(1);
   useEffect(async () => {
 
@@ -25,9 +27,9 @@ function AdminTemplate() {
         setUsers(data);
       }
     });
-
+    getAllUserReport()
     getAllPost();
-
+    getAllPostReport()
   }, [])
 
 
@@ -39,6 +41,47 @@ function AdminTemplate() {
       setPosts(data.data)
     })
   }
+
+  function getAllPostReport() {
+    axios({
+      method: "GET",
+      url: `${API_URL}/postsreport`,
+    }).then((data) => {
+      setPostsReport([])
+      setPostsReport(data.data)
+    })
+  }
+  function getAllUserReport() {
+    axios({
+      method: "GET",
+      url: `${API_URL}/usersreport`,
+    }).then((data) => {
+      setUsersReport([])
+      setUsersReport(data.data)
+    })
+  }
+
+  const delPostReport = (id) => {
+    axios({
+      method: "DELETE",
+      url: `${API_URL}/postsreport/${id}`,
+    }).then((data) => {
+      getAllPostReport()
+    })
+  }
+
+  const handelUser = (id) => {
+    axios({
+      method: "DELETE",
+      url: `${API_URL}/usersreport/${id}`
+    })
+      .then((data) => {
+        getAllUserReport()
+      })
+  }
+
+
+
 
   return (
     <>
@@ -64,18 +107,19 @@ function AdminTemplate() {
               Danh sách tin xấu
             </div>
             <div onClick={() => setTab(4)} className={`py-2 px-4 cursor-pointer hover:text-pink-600 border hover:border-pink-500 rounded-full ${tab == 4 ? 'text-pink-600 border-pink-500 ' : ''} `}>
-              Danh sách người dùng
+              Danh sách người dùng xấu
             </div>
-            <div onClick={() => setTab(5)} className={`py-2 px-4 cursor-pointer hover:text-pink-600 border hover:border-pink-500 rounded-full ${tab == 5 ? 'text-pink-600 border-pink-500 ' : ''} `}>
+            {/* <div onClick={() => setTab(5)} className={`py-2 px-4 cursor-pointer hover:text-pink-600 border hover:border-pink-500 rounded-full ${tab == 5 ? 'text-pink-600 border-pink-500 ' : ''} `}>
               Danh sách bình luận xấu
-            </div>
+            </div> */}
           </div>
           <div className="flex-1 w-full">
             {tab === 1 && <User arr={users} />}
             {tab === 2 && <Post arr={posts} />}
-            {/* {tab === 3 && <Post arr={posts} />}
-            {tab === 4 && <Post arr={posts} />}
-            {tab === 5 && <Post arr={posts} />} */}
+            {tab === 3 && <Post arr={postsReport} report delPostReport={delPostReport} />}
+            {tab === 4 && <User arr={usersReport} report handelUser={handelUser} />}
+
+            {/* {tab === 5 && <Post arr={posts} />} */}
 
 
           </div>

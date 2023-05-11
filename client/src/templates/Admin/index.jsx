@@ -81,6 +81,10 @@ function AdminTemplate() {
   }
 
   const addRole = (id) => {
+    if (id === '6405a47ed21b4a7c8f5a7359') {
+      alert("Không thể xoá quyền người dùng này")
+      return;
+    }
     axios({
       method: "POST",
       url: `${API_URL}/usersreport/role/${id}`,

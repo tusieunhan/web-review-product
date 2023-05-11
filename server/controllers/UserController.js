@@ -67,6 +67,7 @@ export const getUser = async (req, res) => {
   }
 };
 
+
 // Get all users
 export const getAllUsers = async (req, res) => {
 
@@ -141,3 +142,5 @@ export const unfollowUser = async (req, res) => {
     }
   }
 };
+
+

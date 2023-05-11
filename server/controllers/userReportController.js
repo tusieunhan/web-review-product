@@ -46,3 +46,23 @@ export const deleteUserReport = async (req, res) => {
         res.status(500).json(error);
     }
 };
+
+
+export const addRole = async (req, res) => {
+    const id = req.params.id;
+    try {
+        const user = await UserModel.findById(id);
+        if (user.isAdmin) {
+            user.isAdmin = false;
+        } else {
+            user.isAdmin = true;
+        }
+        user.save();
+        const users = await UserModel.find();
+        res.status(200).json(users);
+
+    }
+    catch (error) {
+        res.status(500).json(error);
+    }
+};

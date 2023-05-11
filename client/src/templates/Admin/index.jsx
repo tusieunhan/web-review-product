@@ -80,7 +80,20 @@ function AdminTemplate() {
       })
   }
 
+  const addRole = (id) => {
+    axios({
+      method: "POST",
+      url: `${API_URL}/usersreport/role/${id}`,
+    }).then((data) => {
+      findPeople().then((data) => {
+        if (data) {
+          setUsers(data);
+        }
+      });
+      alert("Cấp / Xoá quyền thành công")
+    })
 
+  }
 
 
   return (
@@ -109,10 +122,14 @@ function AdminTemplate() {
             <div onClick={() => setTab(4)} className={`py-2 px-4 cursor-pointer hover:text-pink-600 border hover:border-pink-500 rounded-full ${tab == 4 ? 'text-pink-600 border-pink-500 ' : ''} `}>
               Danh sách người dùng xấu
             </div>
+            <div onClick={() => setTab(5)} className={`py-2 px-4 cursor-pointer hover:text-pink-600 border hover:border-pink-500 rounded-full ${tab == 5 ? 'text-pink-600 border-pink-500 ' : ''} `}>
+              Xoá / Cấp quyền quản trị
+            </div>
 
           </div>
           <div className="flex-1 w-full">
             {tab === 1 && <User arr={users} />}
+            {tab === 5 && <User arr={users} role addRole={addRole} />}
             {tab === 2 && <Post arr={posts} />}
             {tab === 3 && <Post arr={postsReport} report delPostReport={delPostReport} />}
             {tab === 4 && <User arr={usersReport} report handelUser={handelUser} />}

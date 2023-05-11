@@ -76,6 +76,7 @@ const Sidebar = () => {
               alt="avatar"
             />
           </div>
+          {isLogin.isAdmin && (<p className="text-yellow-400 font-bold">Quản trị viên</p>)}
           <Link
             to={`/user/${isLogin.id}`}
             className="text-xl text-center font-medium capitalize mt-4 uk-link-reset"

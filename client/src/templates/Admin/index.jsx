@@ -109,9 +109,7 @@ function AdminTemplate() {
             <div onClick={() => setTab(4)} className={`py-2 px-4 cursor-pointer hover:text-pink-600 border hover:border-pink-500 rounded-full ${tab == 4 ? 'text-pink-600 border-pink-500 ' : ''} `}>
               Danh sách người dùng xấu
             </div>
-            {/* <div onClick={() => setTab(5)} className={`py-2 px-4 cursor-pointer hover:text-pink-600 border hover:border-pink-500 rounded-full ${tab == 5 ? 'text-pink-600 border-pink-500 ' : ''} `}>
-              Danh sách bình luận xấu
-            </div> */}
+
           </div>
           <div className="flex-1 w-full">
             {tab === 1 && <User arr={users} />}

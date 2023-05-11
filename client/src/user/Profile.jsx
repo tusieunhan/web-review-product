@@ -8,8 +8,13 @@ import PostByUser from "./PostByUser";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser, getPostByUser } from "../store/actions/user.action";
 import Load from "../components/load";
+import axios from "axios";
 
 const Profile = () => {
+  const API_URL = process.env.REACT_APP_API_URL;
+
+  const [report, setreport] = useState(false)
+
   const { userId } = useParams();
   const dispatch = useDispatch();
   const [following, setFollowing] = useState(false);
@@ -20,6 +25,17 @@ const Profile = () => {
     });
     return match;
   };
+
+  const handleReport = (userId) => {
+    setreport(true)
+    axios({
+      method: "POST",
+      url: `${API_URL}/usersreport/${userId}`,
+    }).then(() => {
+      alert('Báo cáo thành công')
+    })
+
+  }
 
 
   console.log(isAuthenticated());
@@ -63,6 +79,7 @@ const Profile = () => {
                   alt={users.username}
                   className="bg-gray-200 border-4 border-white rounded-full w-full h-full dark:border-gray-900"
                 />
+
                 <div className="absolute -bottom-3 custom-overly1 flex justify-center pt-4 pb-7 space-x-3 text-2xl text-white uk-transition-slide-bottom-medium w-full">
                   <Link href="#" className="hover:text-white">
                     <i className="uil-camera" />
@@ -72,6 +89,7 @@ const Profile = () => {
                   </Link>
                 </div>
               </div>
+
             </div>
             <div className="lg:w/8/12 flex-1 flex flex-col lg:items-start items-center">
               <h2 className="font-semibold lg:text-2xl text-lg mb-2">
@@ -86,10 +104,19 @@ const Profile = () => {
               <div className="flex font-semibold mb-3 space-x-2  dark:text-gray-10">
                 <a href={`mailto:` + users.email}>{users.email}</a>
               </div>
+
               <div className="capitalize flex font-semibold space-x-3 text-center text-sm my-2">
                 {isAuthenticated().user &&
                   isAuthenticated().user._id === users._id ? (
                   <>
+                    <button
+                      onClick={() => handleReport(users._id)}
+
+                      className="bg-gray-100 shadow-sm p-2 pink-200 px-6 rounded-md text-red-400 hover:text-white hover:bg-gray-400"
+
+                    >
+                      {!report ? 'Báo cáo' : 'Đã báo cáo'}
+                    </button>
                     <Link
                       className="bg-pink-500 shadow-sm p-2 pink-500 px-6 rounded-md text-white hover:text-white hover:bg-pink-600"
                       to={`/setting`}

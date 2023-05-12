@@ -110,7 +110,7 @@ const Sidebar = () => {
 		C244.955,413.993,233.974,422.218,221.109,422.218z"
                 />
               </svg>
-              <span> Cách bài đánh giá </span>
+              <span> Các bài đánh giá </span>
             </Link>
           </li>
           <li className={isActive(`/search`)}>
